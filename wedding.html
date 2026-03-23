@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Save the Date | Jayleen & Seann</title>
+  <style>
+    :root {
+      --bg: #f6efe6;
+      --paper: #fffaf4;
+      --paper-soft: #f2e6d8;
+      --text: #3a2d24;
+      --muted: #7e6b5e;
+      --accent: #b88f70;
+      --accent-dark: #8f6b52;
+      --line: rgba(122, 92, 70, 0.18);
+      --shadow: 0 22px 55px rgba(58, 37, 22, 0.14);
+      --radius: 28px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Georgia, "Times New Roman", serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top, rgba(255,255,255,0.85), transparent 36%),
+        linear-gradient(180deg, #fbf7f2 0%, #f0e3d6 100%);
+      overflow-x: hidden;
+    }
+
+    body.page-open {
+      overflow: auto;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .screen {
+      min-height: 100vh;
+      width: 100%;
+    }
+
+    .launch-screen {
+      position: fixed;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 2rem;
+      background:
+        linear-gradient(rgba(246, 239, 230, 0.72), rgba(246, 239, 230, 0.92)),
+        url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1600&q=80') center/cover;
+      z-index: 30;
+      transition: opacity 0.9s ease, visibility 0.9s ease;
+    }
+
+    .launch-screen.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .launch-card {
+      width: min(100%, 720px);
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .launch-card .eyebrow {
+      margin-bottom: 1rem;
+    }
+
+    .launch-card h1 {
+      font-size: clamp(2.8rem, 6vw, 5.2rem);
+      margin: 0.2rem 0 1rem;
+      font-weight: 500;
+      line-height: 1.05;
+    }
+
+    .launch-card p {
+      max-width: 36rem;
+      margin: 0 auto 1.8rem;
+      color: var(--muted);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 1rem;
+    }
+
+    .envelope-wrap {
+      display: grid;
+      place-items: center;
+      margin-top: 1.5rem;
+    }
+
+    .envelope-button {
+      position: relative;
+      width: min(88vw, 380px);
+      aspect-ratio: 1.25 / 1;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      padding: 0;
+      filter: drop-shadow(0 18px 40px rgba(66, 41, 19, 0.16));
+      transition: transform 0.25s ease;
+    }
+
+    .envelope-button:hover {
+      transform: translateY(-4px);
+    }
+
+    .envelope-shell {
+      position: absolute;
+      inset: 0;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #f7ebdf 0%, #ead7c4 100%);
+      border: 1px solid rgba(122, 92, 70, 0.18);
+      overflow: hidden;
+    }
+
+    .envelope-back {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, #f4e6d8 0%, #e9d5c1 100%);
+    }
+
+    .envelope-letter {
+      position: absolute;
+      left: 50%;
+      bottom: 16%;
+      width: 74%;
+      height: 70%;
+      transform: translateX(-50%);
+      background: linear-gradient(180deg, #fffdf9 0%, #fff6ec 100%);
+      border-radius: 16px 16px 10px 10px;
+      border: 1px solid rgba(122, 92, 70, 0.12);
+      box-shadow: 0 8px 20px rgba(80, 55, 34, 0.08);
+      display: grid;
+      place-items: center;
+      padding: 1rem;
+      transition: transform 0.9s ease, opacity 0.9s ease;
+      z-index: 2;
+    }
+
+    .envelope-letter::before,
+    .envelope-letter::after {
+      content: "";
+      position: absolute;
+      left: 12%;
+      right: 12%;
+      height: 1px;
+      background: rgba(184, 143, 112, 0.28);
+    }
+
+    .envelope-letter::before { top: 36%; }
+    .envelope-letter::after { top: 54%; }
+
+    .letter-text {
+      text-align: center;
+    }
+
+    .letter-text strong {
+      display: block;
+      font-size: 1.35rem;
+      font-weight: 500;
+      margin-bottom: 0.35rem;
+    }
+
+    .letter-text span {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.82rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .envelope-front {
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 72%;
+      background: linear-gradient(180deg, #f2e1d0 0%, #e7d0bb 100%);
+      clip-path: polygon(0 0, 50% 62%, 100% 0, 100% 100%, 0 100%);
+      border-top: 1px solid rgba(122, 92, 70, 0.1);
+      z-index: 4;
+    }
+
+    .envelope-flap {
+      position: absolute;
+      inset: 0;
+      transform-origin: top center;
+      transition: transform 0.9s ease;
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    .envelope-flap::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 60%;
+      background: linear-gradient(180deg, #f7e9dc 0%, #efdcc9 100%);
+      clip-path: polygon(0 0, 50% 100%, 100% 0);
+      border: 1px solid rgba(122, 92, 70, 0.12);
+      border-bottom: 0;
+    }
+
+    .wax-seal {
+      position: absolute;
+      left: 50%;
+      top: 48%;
+      transform: translate(-50%, -50%);
+      width: 62px;
+      height: 62px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #c28b7e, #935b53 80%);
+      box-shadow: 0 8px 20px rgba(90, 48, 44, 0.18);
+      display: grid;
+      place-items: center;
+      color: #fff7f0;
+      font-size: 1.1rem;
+      letter-spacing: 0.08em;
+      z-index: 6;
+    }
+
+    .hint {
+      margin-top: 1.2rem;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.92rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+
+    .opening .envelope-flap {
+      transform: rotateX(180deg);
+    }
+
+    .opening .envelope-letter {
+      transform: translateX(-50%) translateY(-120px);
+      opacity: 0;
+    }
+
+    .main-page {
+      position: relative;
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.9s ease 0.2s, transform 0.9s ease 0.2s;
+    }
+
+    .main-page.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .container {
+      width: min(calc(100% - 2rem), 1180px);
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(14px);
+      background: rgba(251, 248, 244, 0.8);
+      border-bottom: 1px solid rgba(176, 138, 106, 0.12);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 0;
+    }
+
+    .brand {
+      font-size: 1.15rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .button,
+    button {
+      border: 0;
+      border-radius: 999px;
+      background: var(--accent);
+      color: white;
+      padding: 0.95rem 1.5rem;
+      font-size: 0.95rem;
+      cursor: pointer;
+      font-family: Arial, Helvetica, sans-serif;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .button:hover,
+    button:hover {
+      background: var(--accent-dark);
+      transform: translateY(-1px);
+    }
+
+    .hero {
+      padding: 5.5rem 0 4rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 0.45rem 0.8rem;
+      border-radius: 999px;
+      background: rgba(176, 138, 106, 0.12);
+      color: var(--accent-dark);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    h1, h2, h3 {
+      margin: 0 0 1rem;
+      line-height: 1.1;
+      font-weight: 500;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+    }
+
+    .lead {
+      font-size: 1.08rem;
+      color: var(--muted);
+      max-width: 42rem;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .button.secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid rgba(122, 92, 70, 0.18);
+    }
+
+    .hero-card,
+    .panel,
+    .timeline-item,
+    .faq-item,
+    .story-card {
+      background: var(--paper);
+      border: 1px solid rgba(176, 138, 106, 0.14);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius);
+    }
+
+    .hero-card { overflow: hidden; }
+
+    .hero-image {
+      height: 100%;
+      min-height: 520px;
+      background: linear-gradient(rgba(74, 50, 37, 0.15), rgba(74, 50, 37, 0.18)), url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1200&q=80') center/cover;
+    }
+
+    section { padding: 2rem 0 4.5rem; }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 1.5rem;
+      align-items: end;
+      margin-bottom: 1.8rem;
+    }
+
+    .section-copy {
+      max-width: 44rem;
+      color: var(--muted);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .details-grid,
+    .story-grid,
+    .faq-grid,
+    .footer-grid {
+      display: grid;
+      gap: 1.4rem;
+    }
+
+    .details-grid { grid-template-columns: repeat(3, 1fr); }
+
+    .panel { padding: 1.6rem; }
+
+    .label {
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--muted);
+      font-size: 0.86rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .value { font-size: 1.35rem; }
+
+    .countdown {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .count-box {
+      text-align: center;
+      padding: 1rem;
+      background: rgba(176, 138, 106, 0.08);
+      border-radius: 18px;
+    }
+
+    .count-box strong {
+      display: block;
+      font-size: 1.8rem;
+      font-weight: 500;
+    }
+
+    .timeline { display: grid; gap: 1rem; }
+
+    .timeline-item {
+      padding: 1.4rem 1.5rem;
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 1rem;
+      align-items: start;
+    }
+
+    .timeline-time {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.95rem;
+      color: var(--accent-dark);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding-top: 0.2rem;
+    }
+
+    .story-grid { grid-template-columns: repeat(3, 1fr); }
+
+    .story-card { overflow: hidden; }
+
+    .story-card img {
+      height: 240px;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    .story-card .content { padding: 1.25rem; }
+
+    .rsvp-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    form.panel {
+      display: grid;
+      gap: 1rem;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 0.95rem 1rem;
+      border-radius: 14px;
+      border: 1px solid rgba(122, 92, 70, 0.18);
+      background: white;
+      font: inherit;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .faq-grid { grid-template-columns: 1fr 1fr; }
+
+    .faq-item { padding: 1.3rem 1.4rem; }
+
+    .faq-item p,
+    .panel p,
+    .timeline-item p,
+    .story-card p,
+    footer p,
+    li {
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--muted);
+    }
+
+    .footer {
+      padding: 3rem 0 4rem;
+      border-top: 1px solid rgba(176, 138, 106, 0.16);
+    }
+
+    .footer-grid { grid-template-columns: 1.2fr 1fr 1fr; }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    li + li { margin-top: 0.5rem; }
+
+    @media (max-width: 960px) {
+      .hero-grid,
+      .rsvp-wrap,
+      .details-grid,
+      .story-grid,
+      .faq-grid,
+      .footer-grid { grid-template-columns: 1fr; }
+
+      .timeline-item { grid-template-columns: 1fr; }
+      .hero-image { min-height: 380px; }
+    }
+
+    @media (max-width: 640px) {
+      .nav { flex-direction: column; align-items: flex-start; }
+      .countdown { grid-template-columns: repeat(2, 1fr); }
+      .hero { padding-top: 3.5rem; }
+      .section-head { flex-direction: column; align-items: flex-start; }
+      .envelope-button { width: min(92vw, 320px); }
+      .wax-seal { width: 54px; height: 54px; }
+    }
+  </style>
+</head>
+<body>
+  <section class="launch-screen screen" id="launchScreen">
+    <div class="launch-card">
+      <span class="eyebrow">Save the date</span>
+      <h1>You’re invited to celebrate our forever.</h1>
+      <p>
+        Tap the envelope to open our wedding site and view the details, timeline, RSVP, and countdown to the big day.
+      </p>
+      <div class="envelope-wrap">
+        <button class="envelope-button" id="envelopeButton" aria-label="Open invitation">
+          <div class="envelope-shell opening-ready" id="envelopeShell">
+            <div class="envelope-back"></div>
+            <div class="envelope-letter">
+              <div class="letter-text">
+                <strong>Jayleen & Seann</strong>
+                <span>June 27, 2026</span>
+              </div>
+            </div>
+            <div class="envelope-front"></div>
+            <div class="envelope-flap"></div>
+            <div class="wax-seal">J&S</div>
+          </div>
+        </button>
+      </div>
+      <div class="hint">Click to open invitation</div>
+    </div>
+  </section>
+
+  <div class="main-page" id="mainPage">
+    <header class="site-header">
+      <div class="container nav">
+        <a href="#top" class="brand">Jayleen & Seann</a>
+        <nav class="nav-links">
+          <a href="#details">Details</a>
+          <a href="#schedule">Schedule</a>
+          <a href="#story">Our Story</a>
+          <a href="#rsvp">RSVP</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="container hero-grid">
+          <div>
+            <span class="eyebrow">Together with their families</span>
+            <h2 style="font-size: clamp(3rem, 6vw, 5.4rem);">A joyful celebration of love, family, and forever.</h2>
+            <p class="lead">
+              We are delighted to invite you to celebrate our wedding on Saturday, June 27, 2026,
+              surrounded by candlelight, garden blooms, and the people we love most.
+            </p>
+            <div class="hero-actions">
+              <a class="button" href="#rsvp">RSVP Now</a>
+              <a class="button secondary" href="#schedule">View Schedule</a>
+            </div>
+            <div class="countdown" aria-label="Wedding countdown" id="countdown">
+              <div class="count-box"><strong id="days">--</strong><span>Days</span></div>
+              <div class="count-box"><strong id="hours">--</strong><span>Hours</span></div>
+              <div class="count-box"><strong id="minutes">--</strong><span>Minutes</span></div>
+              <div class="count-box"><strong id="seconds">--</strong><span>Seconds</span></div>
+            </div>
+          </div>
+          <div class="hero-card">
+            <div class="hero-image" role="img" aria-label="Romantic wedding portrait"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="details">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <span class="eyebrow">Wedding details</span>
+              <h2>Everything you need for the weekend</h2>
+            </div>
+            <p class="section-copy">
+              From the ceremony to the reception and nearby accommodations, here is the information to help you plan your visit.
+            </p>
+          </div>
+          <div class="details-grid">
+            <article class="panel">
+              <div class="label">Ceremony</div>
+              <div class="value">4:30 PM</div>
+              <p>Rosewood Garden Estate<br />123 Willow Lane<br />Austin, Texas</p>
+            </article>
+            <article class="panel">
+              <div class="label">Reception</div>
+              <div class="value">6:00 PM</div>
+              <p>Dinner, dancing, and toasts immediately following the ceremony in the glasshouse pavilion.</p>
+            </article>
+            <article class="panel">
+              <div class="label">Dress code</div>
+              <div class="value">Formal Garden Attire</div>
+              <p>Soft colors, elegant silhouettes, and comfortable shoes for an evening celebration under the stars.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="schedule">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <span class="eyebrow">Weekend schedule</span>
+              <h2>Celebrate with us all day</h2>
+            </div>
+          </div>
+          <div class="timeline">
+            <article class="timeline-item">
+              <div class="timeline-time">3:45 PM</div>
+              <div>
+                <h3>Guest arrival</h3>
+                <p>Welcome refreshments will be served in the courtyard before guests are seated for the ceremony.</p>
+              </div>
+            </article>
+            <article class="timeline-item">
+              <div class="timeline-time">4:30 PM</div>
+              <div>
+                <h3>Ceremony begins</h3>
+                <p>We exchange vows in the garden surrounded by seasonal florals and live strings.</p>
+              </div>
+            </article>
+            <article class="timeline-item">
+              <div class="timeline-time">5:15 PM</div>
+              <div>
+                <h3>Cocktail hour</h3>
+                <p>Enjoy signature drinks, passed hors d'oeuvres, and a relaxed golden-hour gathering.</p>
+              </div>
+            </article>
+            <article class="timeline-item">
+              <div class="timeline-time">6:00 PM</div>
+              <div>
+                <h3>Dinner & toasts</h3>
+                <p>A seated dinner followed by heartfelt speeches from family and friends.</p>
+              </div>
+            </article>
+            <article class="timeline-item">
+              <div class="timeline-time">8:00 PM</div>
+              <div>
+                <h3>Dancing</h3>
+                <p>The dance floor opens with live music and late-night desserts to keep the celebration going.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="story">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <span class="eyebrow">Our story</span>
+              <h2>A few chapters from our journey</h2>
+            </div>
+            <p class="section-copy">
+              The moments that brought us here, from our first coffee to the proposal that changed everything.
+            </p>
+          </div>
+          <div class="story-grid">
+            <article class="story-card">
+              <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=900&q=80" alt="Couple walking together" />
+              <div class="content">
+                <h3>How we met</h3>
+                <p>We met by chance at a neighborhood café and talked until closing, knowing something special had begun.</p>
+              </div>
+            </article>
+            <article class="story-card">
+              <img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=900&q=80" alt="Couple laughing outdoors" />
+              <div class="content">
+                <h3>The adventure</h3>
+                <p>From weekend road trips to quiet evenings at home, we built a life filled with laughter and intention.</p>
+              </div>
+            </article>
+            <article class="story-card">
+              <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=900&q=80" alt="Proposal moment" />
+              <div class="content">
+                <h3>The proposal</h3>
+                <p>At sunset on our favorite overlook, one question turned into the easiest and happiest answer.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="rsvp">
+        <div class="container rsvp-wrap">
+          <div>
+            <span class="eyebrow">RSVP</span>
+            <h2>We would love to celebrate with you</h2>
+            <p class="section-copy">
+              Kindly reply by May 15, 2026. Let us know whether you can attend and share any dietary needs or notes for the weekend.
+            </p>
+            <div class="panel">
+              <h3>Travel notes</h3>
+              <p>Complimentary valet parking will be available. A hotel block has been reserved at The Marigold House, ten minutes from the venue.</p>
+            </div>
+          </div>
+          <form class="panel">
+            <label>
+              <span class="label">Full name</span>
+              <input type="text" placeholder="Your name" />
+            </label>
+            <label>
+              <span class="label">Email address</span>
+              <input type="email" placeholder="you@example.com" />
+            </label>
+            <label>
+              <span class="label">Attendance</span>
+              <select>
+                <option>Joyfully accepts</option>
+                <option>Regretfully declines</option>
+              </select>
+            </label>
+            <label>
+              <span class="label">Message or dietary notes</span>
+              <textarea placeholder="Share a note with the couple"></textarea>
+            </label>
+            <button type="submit">Send RSVP</button>
+          </form>
+        </div>
+      </section>
+
+      <section id="faq">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <span class="eyebrow">FAQ</span>
+              <h2>Helpful answers before the big day</h2>
+            </div>
+          </div>
+          <div class="faq-grid">
+            <article class="faq-item">
+              <h3>Can I bring a guest?</h3>
+              <p>Please refer to your invitation. We are keeping the celebration intimate and appreciate your understanding.</p>
+            </article>
+            <article class="faq-item">
+              <h3>Are children invited?</h3>
+              <p>While we adore your little ones, the wedding weekend will be an adults-only celebration unless otherwise noted.</p>
+            </article>
+            <article class="faq-item">
+              <h3>Will the ceremony be outdoors?</h3>
+              <p>Yes. The ceremony will take place in the garden, followed by an indoor-outdoor reception in the pavilion.</p>
+            </article>
+            <article class="faq-item">
+              <h3>What if I have dietary restrictions?</h3>
+              <p>Please include them in your RSVP and we will make every effort to accommodate you.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-grid">
+        <div>
+          <h3>Jayleen & Seann</h3>
+          <p>Thank you for being part of our story. We cannot wait to celebrate with you.</p>
+        </div>
+        <div>
+          <h3>Quick links</h3>
+          <ul>
+            <li><a href="#details">Details</a></li>
+            <li><a href="#schedule">Schedule</a></li>
+            <li><a href="#rsvp">RSVP</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Contact</h3>
+          <ul>
+            <li>hello@ourwedding.com</li>
+            <li>@avaandethan</li>
+            <li>Austin, Texas</li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      const targetDate = new Date('2026-06-27T00:00:00');
+      const daysEl = document.getElementById('days');
+      const hoursEl = document.getElementById('hours');
+      const minutesEl = document.getElementById('minutes');
+      const secondsEl = document.getElementById('seconds');
+      const launchScreen = document.getElementById('launchScreen');
+      const envelopeButton = document.getElementById('envelopeButton');
+      const envelopeShell = document.getElementById('envelopeShell');
+      const mainPage = document.getElementById('mainPage');
+
+      function updateCountdown() {
+        const now = new Date();
+        const diff = targetDate - now;
+
+        if (diff <= 0) {
+          daysEl.textContent = '0';
+          hoursEl.textContent = '0';
+          minutesEl.textContent = '0';
+          secondsEl.textContent = '0';
+          return;
+        }
+
+        const totalSeconds = Math.floor(diff / 1000);
+        const days = Math.floor(totalSeconds / 86400);
+        const hours = Math.floor((totalSeconds % 86400) / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
+
+        daysEl.textContent = String(days);
+        hoursEl.textContent = String(hours).padStart(2, '0');
+        minutesEl.textContent = String(minutes).padStart(2, '0');
+        secondsEl.textContent = String(seconds).padStart(2, '0');
+      }
+
+      function openInvitation() {
+        envelopeShell.classList.add('opening');
+        document.body.classList.add('page-open');
+
+        setTimeout(function () {
+          launchScreen.classList.add('hidden');
+          mainPage.classList.add('visible');
+          window.location.hash = '#top';
+        }, 850);
+      }
+
+      envelopeButton.addEventListener('click', openInvitation, { once: true });
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    })();
+  </script>
+</body>
+</html>
