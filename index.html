@@ -846,13 +846,6 @@
     const intro = document.getElementById('intro');
     const page = document.getElementById('page');
     const openEnvelope = document.getElementById('openEnvelope');
-
-    openEnvelope.addEventListener('click', () => {
-      intro.classList.add('hidden');
-      page.classList.add('visible');
-      document.body.classList.add('invitation-open');
-      window.location.hash = '#top';
-    });
     
     (function () {
       // Target date: June 27, 2026, 6:30 PM CDT (UTC-5)
@@ -892,23 +885,6 @@
         minutesEl.textContent = String(minutes).padStart(2, '0');
         secondsEl.textContent = String(seconds).padStart(2, '0');
       }
-
-      // Initial call and interval
-      updateCountdown();
-      setInterval(updateCountdown, 1000);
-
-      // Envelope click
-      openEnvelope.addEventListener('click', () => {
-        if (isOpening) return;
-        isOpening = true;
-        envelopeRoot.classList.add('opening');
-        setTimeout(() => {
-          intro.classList.add('hidden');
-          page.classList.add('visible');
-          document.body.classList.add('invitation-open');
-          window.location.hash = '#top';
-        }, 1400); // matches flap animation
-      });
 
       function revealPage() {
         if (isOpening) return;
