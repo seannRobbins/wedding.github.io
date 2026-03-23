@@ -3,339 +3,242 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Save the Date | Jayleen & Seann</title>
+  <title>Jayleen & Seann | Save the Date</title>
   <style>
     :root {
-      --bg: #f6efe6;
-      --paper: #fffaf4;
-      --paper-soft: #f2e6d8;
-      --text: #3a2d24;
-      --muted: #7e6b5e;
-      --accent: #b88f70;
-      --accent-dark: #8f6b52;
-      --line: rgba(122, 92, 70, 0.18);
-      --shadow: 0 22px 55px rgba(58, 37, 22, 0.14);
+      --bg: #f4eadf;
+      --paper: #efe2d4;
+      --paper-2: #e8d7c4;
+      --paper-3: #dec8b0;
+      --ink: #4f3a2d;
+      --muted: #866f60;
+      --accent: #9a6a63;
+      --accent-dark: #774942;
+      --card: #fffaf5;
+      --line: rgba(92, 64, 45, 0.12);
+      --shadow: 0 24px 60px rgba(71, 45, 29, 0.14);
       --radius: 28px;
     }
 
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
       min-height: 100vh;
       font-family: Georgia, "Times New Roman", serif;
-      color: var(--text);
+      color: var(--ink);
       background:
-        radial-gradient(circle at top, rgba(255,255,255,0.85), transparent 36%),
-        linear-gradient(180deg, #fbf7f2 0%, #f0e3d6 100%);
+        radial-gradient(circle at top, rgba(255,255,255,0.7), transparent 32%),
+        linear-gradient(180deg, #fbf6f0 0%, #f1e3d5 100%);
       overflow-x: hidden;
     }
 
-    body.page-open {
-      overflow: auto;
-    }
+    body.invitation-open { overflow: auto; }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
 
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
-    .screen {
-      min-height: 100vh;
-      width: 100%;
-    }
-
-    .launch-screen {
+    .intro {
       position: fixed;
       inset: 0;
+      z-index: 20;
       display: grid;
       place-items: center;
       padding: 2rem;
       background:
-        linear-gradient(rgba(246, 239, 230, 0.72), rgba(246, 239, 230, 0.92)),
-        url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1600&q=80') center/cover;
-      z-index: 30;
+        linear-gradient(rgba(247, 240, 233, 0.7), rgba(247, 240, 233, 0.92)),
+        url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1800&q=80') center/cover;
       transition: opacity 0.9s ease, visibility 0.9s ease;
     }
 
-    .launch-screen.hidden {
+    .intro.hidden {
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
     }
 
-    .launch-card {
-      width: min(100%, 720px);
+    .intro-card {
+      width: min(100%, 760px);
       text-align: center;
-      padding: 2rem;
     }
 
-    .launch-card .eyebrow {
+    .eyebrow {
+      display: inline-block;
+      padding: 0.5rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(154, 106, 99, 0.1);
+      color: var(--accent-dark);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
       margin-bottom: 1rem;
+      border: 1px solid rgba(154, 106, 99, 0.08);
+      backdrop-filter: blur(10px);
     }
 
-    .launch-card h1 {
-      font-size: clamp(2.8rem, 6vw, 5.2rem);
-      margin: 0.2rem 0 1rem;
+    .intro h1 {
+      margin: 0 0 0.8rem;
       font-weight: 500;
       line-height: 1.05;
+      font-size: clamp(3rem, 6vw, 5.3rem);
     }
 
-    .launch-card p {
+    .intro p {
       max-width: 36rem;
-      margin: 0 auto 1.8rem;
+      margin: 0 auto 2rem;
       color: var(--muted);
       font-family: Arial, Helvetica, sans-serif;
-      font-size: 1rem;
+      line-height: 1.7;
     }
 
-    .envelope-wrap {
+    .envelope-scene {
       display: grid;
       place-items: center;
-      margin-top: 1.5rem;
+      margin: 0 auto;
+      width: min(92vw, 520px);
+      perspective: 1400px;
     }
 
     .envelope-button {
-      position: relative;
-      width: min(88vw, 380px);
-      aspect-ratio: 1.25 / 1;
+      appearance: none;
       border: 0;
       background: transparent;
-      cursor: pointer;
       padding: 0;
-      filter: drop-shadow(0 18px 40px rgba(66, 41, 19, 0.16));
+      cursor: pointer;
+      width: 100%;
       transition: transform 0.25s ease;
     }
 
-    .envelope-button:hover {
-      transform: translateY(-4px) scale(1.01);
+    .envelope-button:hover { transform: translateY(-4px) scale(1.01); }
+
+    .envelope {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1.28 / 1;
+      filter: drop-shadow(0 24px 50px rgba(59, 39, 26, 0.18));
     }
 
-    .envelope-shell {
-      position: absolute;
-      inset: 0;
-      border-radius: 18px;
-      background:
-        radial-gradient(circle at top left, rgba(255,255,255,0.45), transparent 28%),
-        repeating-linear-gradient(45deg, rgba(255,255,255,0.04) 0 2px, rgba(0,0,0,0.015) 2px 4px),
-        linear-gradient(180deg, #f7ebdf 0%, #ead7c4 100%);
-      border: 1px solid rgba(122, 92, 70, 0.18);
-      overflow: hidden;
+    .envelope-svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      overflow: visible;
     }
 
-    .envelope-back {
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at top, rgba(255,255,255,0.22), transparent 40%),
-        repeating-linear-gradient(0deg, rgba(255,255,255,0.03) 0 2px, rgba(0,0,0,0.012) 2px 4px),
-        linear-gradient(180deg, #f4e6d8 0%, #ead7c4 100%);
-    }
-
-    .envelope-back::before,
-    .envelope-back::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      width: 50.5%;
-      height: 72%;
-      background:
-      repeating-linear-gradient(135deg, rgba(255,255,255,0.03) 0 2px, rgba(0,0,0,0.01) 2px 4px),
-      linear-gradient(180deg, #efdece 0%, #e5cfba 100%);
-      border-top: 1px solid rgba(122, 92, 70, 0.1);
-      z-index: 1;
-    }
-
-    .envelope-back::before {
-      left: -1px;
-      clip-path: polygon(0 100%, 0 0, 100% 100%);
-    }
-
-    .envelope-back::after {
-      right: -1px;
-      clip-path: polygon(100% 100%, 0 100%, 100% 0);
-    }
-
-    .envelope-letter {
+    .letter {
       position: absolute;
       left: 50%;
-      bottom: 16%;
-      width: 74%;
-      height: 70%;
+      bottom: 14%;
+      width: 68%;
+      height: 66%;
       transform: translateX(-50%);
+      border-radius: 18px 18px 12px 12px;
       background:
-      radial-gradient(circle at top, rgba(255,255,255,0.72), transparent 32%),
-      repeating-linear-gradient(0deg, rgba(0,0,0,0.008) 0 2px, rgba(255,255,255,0.04) 2px 5px),
-      linear-gradient(180deg, #fffdf9 0%, #fff6ec 100%);
-      border-radius: 16px 16px 10px 10px;
-      border: 1px solid rgba(122, 92, 70, 0.12);
-      box-shadow: 0 10px 24px rgba(80, 55, 34, 0.08), inset 0 1px 0 rgba(255,255,255,0.7);
+        linear-gradient(180deg, rgba(255,255,255,0.75), rgba(255,255,255,0) 24%),
+        repeating-linear-gradient(0deg, rgba(124, 92, 71, 0.03) 0 2px, rgba(255,255,255,0.25) 2px 5px),
+        linear-gradient(180deg, #fffdf8 0%, #fff7ee 100%);
+      border: 1px solid rgba(92, 64, 45, 0.08);
+      box-shadow: 0 12px 28px rgba(78, 55, 38, 0.1), inset 0 1px 0 rgba(255,255,255,0.72);
       display: grid;
       place-items: center;
-      padding: 1rem;
-      transition: transform 0.9s ease, opacity 0.9s ease;
       z-index: 2;
+      transition: transform 0.95s ease, opacity 0.9s ease;
     }
 
-    .envelope-letter::before,
-    .envelope-letter::after {
+    .letter::before,
+    .letter::after {
       content: "";
       position: absolute;
       left: 12%;
       right: 12%;
       height: 1px;
-      background: rgba(184, 143, 112, 0.28);
+      background: rgba(154, 106, 99, 0.22);
     }
 
-    .envelope-letter::before { top: 36%; }
-    .envelope-letter::after { top: 54%; }
+    .letter::before { top: 37%; }
+    .letter::after { top: 55%; }
 
-    .letter-text {
-      text-align: center;
-    }
-
-    .letter-text strong {
+    .letter-inner { text-align: center; }
+    .letter-inner strong {
       display: block;
-      font-size: 1.35rem;
+      font-size: 1.55rem;
       font-weight: 500;
       margin-bottom: 0.35rem;
     }
 
-    .letter-text span {
+    .letter-inner span {
       font-family: Arial, Helvetica, sans-serif;
-      font-size: 0.82rem;
-      letter-spacing: 0.14em;
+      font-size: 0.84rem;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--muted);
     }
 
-    .envelope-front {
-      position: absolute;
-      inset: auto 0 0 0;
-      height: 76%;
-      z-index: 4;
-      pointer-events: none;
-    }
-
-    .envelope-front::before,
-    .envelope-front::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      width: 50.5%;
-      height: 100%;
-      background: linear-gradient(180deg, #f1e1d2 0%, #e5cfba 100%);
-      border-top: 1px solid rgba(122, 92, 70, 0.1);
-    }
-
-    .envelope-front::before {
-      left: -1px;
-      clip-path: polygon(0 100%, 0 0, 100% 100%);
-      border-right: 1px solid rgba(122, 92, 70, 0.06);
-    }
-
-    .envelope-front::after {
-      right: -1px;
-      clip-path: polygon(100% 100%, 0 100%, 100% 0);
-      border-left: 1px solid rgba(122, 92, 70, 0.06);
-    }
-
-    .envelope-flap {
+    .top-flap {
       position: absolute;
       inset: 0;
-      transform-origin: top center;
-      transition: transform 0.9s ease;
       z-index: 5;
+      transform-origin: top center;
+      transform-style: preserve-3d;
+      transition: transform 0.95s ease;
       pointer-events: none;
     }
 
-    .envelope-flap::before {
-      content: "";
-      position: absolute;
-      left: -1px;
-      right: -1px;
-      top: 0;
-      height: 58%;
-      background:
-      radial-gradient(circle at top, rgba(255,255,255,0.3), transparent 38%),
-      repeating-linear-gradient(45deg, rgba(255,255,255,0.03) 0 2px, rgba(0,0,0,0.01) 2px 4px),
-      linear-gradient(180deg, #f8ecdf 0%, #efdcca 100%);
-      clip-path: polygon(0 0, 100% 0, 50% 88%);
-      border: 1px solid rgba(122, 92, 70, 0.12);
-      box-shadow: inset 0 -10px 18px rgba(255, 255, 255, 0.22), 0 2px 8px rgba(92, 66, 46, 0.06);
-    }
-
-    .wax-seal {
+    .seal {
       position: absolute;
       left: 50%;
-      top: 46%;
+      top: 41.5%;
       transform: translate(-50%, -50%);
-      width: 74px;
-      height: 74px;
-      border-radius: 50%;
-      background:
-        radial-gradient(circle at 32% 28%, rgba(255,255,255,0.34), transparent 14%),
-        radial-gradient(circle
+      width: 88px;
+      height: 88px;
+      z-index: 7;
+      transition: transform 0.95s ease, opacity 0.7s ease;
+      pointer-events: none;
+    }
+
+    .seal svg { width: 100%; height: 100%; display: block; }
 
     .hint {
-      margin-top: 1.2rem;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 0.92rem;
-      color: var(--muted);
-      letter-spacing: 0.04em;
+      margin-top: 1.35rem;
       display: inline-flex;
       align-items: center;
       gap: 0.55rem;
-      padding: 0.7rem 1rem;
-      background: rgba(255,255,255,0.46);
-      border: 1px solid rgba(122, 92, 70, 0.12);
+      padding: 0.78rem 1rem;
       border-radius: 999px;
-      box-shadow: 0 10px 24px rgba(66, 41, 19, 0.05);
-      backdrop-filter: blur(8px);
+      background: rgba(255,255,255,0.46);
+      border: 1px solid rgba(92, 64, 45, 0.1);
+      box-shadow: 0 12px 28px rgba(71, 45, 29, 0.06);
+      color: var(--muted);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.92rem;
+      letter-spacing: 0.04em;
+      backdrop-filter: blur(10px);
     }
 
     .hint::before {
       content: "✦";
       color: var(--accent-dark);
-      font-size: 0.9rem;
+      font-size: 0.95rem;
     }
 
-    .opening .envelope-flap {
-      transform: rotateX(180deg);
-    }
+    .opening .top-flap { transform: rotateX(178deg); }
+    .opening .letter { transform: translateX(-50%) translateY(-145px); opacity: 0; }
+    .opening .seal { transform: translate(-50%, -50%) scale(0.86); opacity: 0; }
 
-    .opening .envelope-letter {
-      transform: translateX(-50%) translateY(-120px);
+    .page {
       opacity: 0;
-    }
-
-    .main-page {
-      position: relative;
-      opacity: 0;
-      transform: translateY(18px);
+      transform: translateY(20px);
       transition: opacity 0.9s ease 0.2s, transform 0.9s ease 0.2s;
     }
 
-    .main-page.visible {
+    .page.visible {
       opacity: 1;
       transform: translateY(0);
     }
 
-    .container {
-      width: min(calc(100% - 2rem), 1180px);
-      margin: 0 auto;
-    }
+    .container { width: min(calc(100% - 2rem), 1180px); margin: 0 auto; }
 
     .site-header {
       position: sticky;
@@ -369,11 +272,10 @@
       color: var(--muted);
     }
 
-    .button,
-    button {
+    .button, button {
       border: 0;
       border-radius: 999px;
-      background: var(--accent);
+      background: #b88f70;
       color: white;
       padding: 0.95rem 1.5rem;
       font-size: 0.95rem;
@@ -382,16 +284,12 @@
       transition: transform 0.2s ease, background 0.2s ease;
     }
 
-    .button:hover,
-    button:hover {
-      background: var(--accent-dark);
+    .button:hover, button:hover {
+      background: #8f6b52;
       transform: translateY(-1px);
     }
 
-    .hero {
-      padding: 5.5rem 0 4rem;
-    }
-
+    .hero { padding: 5.5rem 0 4rem; }
     .hero-grid {
       display: grid;
       grid-template-columns: 1.1fr 0.9fr;
@@ -399,28 +297,8 @@
       align-items: center;
     }
 
-    .eyebrow {
-      display: inline-block;
-      padding: 0.45rem 0.8rem;
-      border-radius: 999px;
-      background: rgba(176, 138, 106, 0.12);
-      color: var(--accent-dark);
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 0.82rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      margin-bottom: 1rem;
-    }
-
-    h1, h2, h3 {
-      margin: 0 0 1rem;
-      line-height: 1.1;
-      font-weight: 500;
-    }
-
-    h2 {
-      font-size: clamp(2rem, 4vw, 3.2rem);
-    }
+    h2, h3 { margin: 0 0 1rem; line-height: 1.1; font-weight: 500; }
+    h2 { font-size: clamp(2rem, 4vw, 3.2rem); }
 
     .lead {
       font-size: 1.08rem;
@@ -438,16 +316,12 @@
 
     .button.secondary {
       background: transparent;
-      color: var(--text);
+      color: var(--ink);
       border: 1px solid rgba(122, 92, 70, 0.18);
     }
 
-    .hero-card,
-    .panel,
-    .timeline-item,
-    .faq-item,
-    .story-card {
-      background: var(--paper);
+    .hero-card, .panel, .timeline-item, .faq-item, .story-card {
+      background: var(--card);
       border: 1px solid rgba(176, 138, 106, 0.14);
       box-shadow: var(--shadow);
       border-radius: var(--radius);
@@ -477,16 +351,12 @@
       font-family: Arial, Helvetica, sans-serif;
     }
 
-    .details-grid,
-    .story-grid,
-    .faq-grid,
-    .footer-grid {
+    .details-grid, .story-grid, .faq-grid, .footer-grid {
       display: grid;
       gap: 1.4rem;
     }
 
     .details-grid { grid-template-columns: repeat(3, 1fr); }
-
     .panel { padding: 1.6rem; }
 
     .label {
@@ -521,7 +391,6 @@
     }
 
     .timeline { display: grid; gap: 1rem; }
-
     .timeline-item {
       padding: 1.4rem 1.5rem;
       display: grid;
@@ -533,14 +402,13 @@
     .timeline-time {
       font-family: Arial, Helvetica, sans-serif;
       font-size: 0.95rem;
-      color: var(--accent-dark);
+      color: #8f6b52;
       letter-spacing: 0.05em;
       text-transform: uppercase;
       padding-top: 0.2rem;
     }
 
     .story-grid { grid-template-columns: repeat(3, 1fr); }
-
     .story-card { overflow: hidden; }
 
     .story-card img {
@@ -558,10 +426,7 @@
       align-items: start;
     }
 
-    form.panel {
-      display: grid;
-      gap: 1rem;
-    }
+    form.panel { display: grid; gap: 1rem; }
 
     input, select, textarea {
       width: 100%;
@@ -571,24 +436,14 @@
       background: white;
       font: inherit;
       font-family: Arial, Helvetica, sans-serif;
-      color: var(--text);
+      color: var(--ink);
     }
 
-    textarea {
-      min-height: 120px;
-      resize: vertical;
-    }
-
+    textarea { min-height: 120px; resize: vertical; }
     .faq-grid { grid-template-columns: 1fr 1fr; }
-
     .faq-item { padding: 1.3rem 1.4rem; }
 
-    .faq-item p,
-    .panel p,
-    .timeline-item p,
-    .story-card p,
-    footer p,
-    li {
+    .faq-item p, .panel p, .timeline-item p, .story-card p, footer p, li {
       font-family: Arial, Helvetica, sans-serif;
       color: var(--muted);
     }
@@ -599,25 +454,14 @@
     }
 
     .footer-grid { grid-template-columns: 1.2fr 1fr 1fr; }
-
-    ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
+    ul { list-style: none; padding: 0; margin: 0; }
     li + li { margin-top: 0.5rem; }
 
     @media (max-width: 960px) {
-      .hero-grid,
-      .rsvp-wrap,
-      .details-grid,
-      .story-grid,
-      .faq-grid,
-      .footer-grid { grid-template-columns: 1fr; }
-
+      .hero-grid, .rsvp-wrap, .details-grid, .story-grid, .faq-grid, .footer-grid { grid-template-columns: 1fr; }
       .timeline-item { grid-template-columns: 1fr; }
       .hero-image { min-height: 380px; }
+      .seal { width: 78px; height: 78px; }
     }
 
     @media (max-width: 640px) {
@@ -625,40 +469,95 @@
       .countdown { grid-template-columns: repeat(2, 1fr); }
       .hero { padding-top: 3.5rem; }
       .section-head { flex-direction: column; align-items: flex-start; }
-      .envelope-button { width: min(92vw, 320px); }
-      .wax-seal { width: 54px; height: 54px; }
+      .seal { width: 68px; height: 68px; top: 41%; }
+      .letter { width: 74%; }
     }
   </style>
 </head>
 <body>
-  <section class="launch-screen screen" id="launchScreen">
-    <div class="launch-card">
+  <section class="intro" id="intro">
+    <div class="intro-card">
       <span class="eyebrow">Save the date</span>
-      <h1>You’re invited to celebrate our forever.</h1>
-      <p>
-        Tap the envelope to open our wedding site and view the details, timeline, RSVP, and countdown to the big day.
-      </p>
-      <div class="envelope-wrap">
-        <button class="envelope-button" id="envelopeButton" aria-label="Open invitation">
-          <div class="envelope-shell opening-ready" id="envelopeShell">
-            <div class="envelope-back"></div>
-            <div class="envelope-letter">
-              <div class="letter-text">
+      <h1>Open our invitation.</h1>
+      <p>Click the envelope to unveil our wedding website with the details, RSVP, and live countdown to June 27, 2026.</p>
+
+      <div class="envelope-scene">
+        <button class="envelope-button" id="openEnvelope" aria-label="Open invitation">
+          <div class="envelope" id="envelopeRoot">
+            <div class="letter">
+              <div class="letter-inner">
                 <strong>Jayleen & Seann</strong>
                 <span>June 27, 2026</span>
               </div>
             </div>
-            <div class="envelope-front"></div>
-            <div class="envelope-flap"></div>
-            <div class="wax-seal">J&S</div>
+
+            <svg class="envelope-svg" viewBox="0 0 520 406" aria-hidden="true">
+              <defs>
+                <linearGradient id="paperBase" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#f3e5d7"/>
+                  <stop offset="100%" stop-color="#e6d2bc"/>
+                </linearGradient>
+                <linearGradient id="paperSide" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#efdece"/>
+                  <stop offset="100%" stop-color="#e3cbb4"/>
+                </linearGradient>
+                <linearGradient id="paperTop" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#f8eddf"/>
+                  <stop offset="100%" stop-color="#ecd9c5"/>
+                </linearGradient>
+                <filter id="grain" x="-10%" y="-10%" width="120%" height="120%">
+                  <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" stitchTiles="stitch" result="noise" />
+                  <feColorMatrix in="noise" type="saturate" values="0" />
+                  <feComponentTransfer>
+                    <feFuncA type="table" tableValues="0 0.03" />
+                  </feComponentTransfer>
+                </filter>
+              </defs>
+
+              <rect x="44" y="86" width="432" height="274" rx="18" fill="url(#paperBase)" stroke="rgba(92,64,45,0.12)" />
+              <rect x="44" y="86" width="432" height="274" rx="18" fill="#fff" filter="url(#grain)" opacity="0.8" />
+
+              <polygon points="44,360 44,122 260,360" fill="url(#paperSide)" />
+              <polygon points="476,360 476,122 260,360" fill="url(#paperSide)" />
+              <polygon points="44,360 260,214 476,360 476,360 44,360" fill="#ead6c1" opacity="0.88" />
+
+              <g class="top-flap">
+                <polygon points="44,86 260,240 476,86" fill="url(#paperTop)" stroke="rgba(92,64,45,0.12)" />
+                <polygon points="72,96 260,228 448,96" fill="#fffaf3" opacity="0.18" />
+              </g>
+            </svg>
+
+            <div class="seal">
+              <svg viewBox="0 0 100 100" aria-hidden="true">
+                <defs>
+                  <radialGradient id="wax" cx="32%" cy="28%" r="78%">
+                    <stop offset="0%" stop-color="#d69c92"/>
+                    <stop offset="38%" stop-color="#b56f67"/>
+                    <stop offset="72%" stop-color="#8f4f4c"/>
+                    <stop offset="100%" stop-color="#743a39"/>
+                  </radialGradient>
+                  <radialGradient id="waxHighlight" cx="28%" cy="24%" r="30%">
+                    <stop offset="0%" stop-color="rgba(255,255,255,0.45)"/>
+                    <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+                  </radialGradient>
+                </defs>
+                <path d="M50 6 C57 9,61 4,68 8 C74 12,82 12,87 19 C92 26,98 31,96 40 C95 48,100 54,96 62 C92 69,93 77,86 83 C79 88,75 95,66 94 C58 94,53 99,45 96 C37 93,29 97,22 91 C16 86,8 84,6 75 C4 67,-1 61,2 53 C5 45,1 37,5 30 C9 23,10 14,18 11 C26 8,32 4,40 7 C44 8,47 6,50 6 Z" fill="url(#wax)"/>
+                <path d="M19 29 C31 16,47 12,63 16 C79 20,89 35,88 50 C87 66,77 80,60 84 C44 88,27 84,17 71 C8 59,8 42,19 29 Z" fill="none" stroke="rgba(103,40,40,0.28)" stroke-width="2.3"/>
+                <path d="M50 6 C57 9,61 4,68 8 C74 12,82 12,87 19 C92 26,98 31,96 40 C95 48,100 54,96 62 C92 69,93 77,86 83 C79 88,75 95,66 94 C58 94,53 99,45 96 C37 93,29 97,22 91 C16 86,8 84,6 75 C4 67,-1 61,2 53 C5 45,1 37,5 30 C9 23,10 14,18 11 C26 8,32 4,40 7 C44 8,47 6,50 6 Z" fill="rgba(255,255,255,0.04)"/>
+                <ellipse cx="34" cy="26" rx="14" ry="10" fill="rgba(255,255,255,0.16)"/>
+                <circle cx="50" cy="50" r="23" fill="rgba(115,48,48,0.22)" stroke="rgba(255,245,238,0.12)" />
+                <text x="50" y="56" text-anchor="middle" fill="#fff3ea" font-family="Georgia, serif" font-size="18" letter-spacing="2">J&S</text>
+              </svg>
+            </div>
           </div>
         </button>
       </div>
+
       <div class="hint">Click to open invitation</div>
     </div>
   </section>
 
-  <div class="main-page" id="mainPage">
+  <div class="page" id="page">
     <header class="site-header">
       <div class="container nav">
         <a href="#top" class="brand">Jayleen & Seann</a>
@@ -678,15 +577,12 @@
           <div>
             <span class="eyebrow">Together with their families</span>
             <h2 style="font-size: clamp(3rem, 6vw, 5.4rem);">A joyful celebration of love, family, and forever.</h2>
-            <p class="lead">
-              We are delighted to invite you to celebrate our wedding on Saturday, June 27, 2026,
-              surrounded by candlelight, garden blooms, and the people we love most.
-            </p>
+            <p class="lead">We are delighted to invite you to celebrate our wedding on Saturday, June 27, 2026, surrounded by candlelight, garden blooms, and the people we love most.</p>
             <div class="hero-actions">
               <a class="button" href="#rsvp">RSVP Now</a>
               <a class="button secondary" href="#schedule">View Schedule</a>
             </div>
-            <div class="countdown" aria-label="Wedding countdown" id="countdown">
+            <div class="countdown" aria-label="Wedding countdown">
               <div class="count-box"><strong id="days">--</strong><span>Days</span></div>
               <div class="count-box"><strong id="hours">--</strong><span>Hours</span></div>
               <div class="count-box"><strong id="minutes">--</strong><span>Minutes</span></div>
@@ -706,9 +602,7 @@
               <span class="eyebrow">Wedding details</span>
               <h2>Everything you need for the weekend</h2>
             </div>
-            <p class="section-copy">
-              From the ceremony to the reception and nearby accommodations, here is the information to help you plan your visit.
-            </p>
+            <p class="section-copy">From the ceremony to the reception and nearby accommodations, here is the information to help you plan your visit.</p>
           </div>
           <div class="details-grid">
             <article class="panel">
@@ -739,41 +633,11 @@
             </div>
           </div>
           <div class="timeline">
-            <article class="timeline-item">
-              <div class="timeline-time">3:45 PM</div>
-              <div>
-                <h3>Guest arrival</h3>
-                <p>Welcome refreshments will be served in the courtyard before guests are seated for the ceremony.</p>
-              </div>
-            </article>
-            <article class="timeline-item">
-              <div class="timeline-time">4:30 PM</div>
-              <div>
-                <h3>Ceremony begins</h3>
-                <p>We exchange vows in the garden surrounded by seasonal florals and live strings.</p>
-              </div>
-            </article>
-            <article class="timeline-item">
-              <div class="timeline-time">5:15 PM</div>
-              <div>
-                <h3>Cocktail hour</h3>
-                <p>Enjoy signature drinks, passed hors d'oeuvres, and a relaxed golden-hour gathering.</p>
-              </div>
-            </article>
-            <article class="timeline-item">
-              <div class="timeline-time">6:00 PM</div>
-              <div>
-                <h3>Dinner & toasts</h3>
-                <p>A seated dinner followed by heartfelt speeches from family and friends.</p>
-              </div>
-            </article>
-            <article class="timeline-item">
-              <div class="timeline-time">8:00 PM</div>
-              <div>
-                <h3>Dancing</h3>
-                <p>The dance floor opens with live music and late-night desserts to keep the celebration going.</p>
-              </div>
-            </article>
+            <article class="timeline-item"><div class="timeline-time">3:45 PM</div><div><h3>Guest arrival</h3><p>Welcome refreshments will be served in the courtyard before guests are seated for the ceremony.</p></div></article>
+            <article class="timeline-item"><div class="timeline-time">4:30 PM</div><div><h3>Ceremony begins</h3><p>We exchange vows in the garden surrounded by seasonal florals and live strings.</p></div></article>
+            <article class="timeline-item"><div class="timeline-time">5:15 PM</div><div><h3>Cocktail hour</h3><p>Enjoy signature drinks, passed hors d'oeuvres, and a relaxed golden-hour gathering.</p></div></article>
+            <article class="timeline-item"><div class="timeline-time">6:00 PM</div><div><h3>Dinner & toasts</h3><p>A seated dinner followed by heartfelt speeches from family and friends.</p></div></article>
+            <article class="timeline-item"><div class="timeline-time">8:00 PM</div><div><h3>Dancing</h3><p>The dance floor opens with live music and late-night desserts to keep the celebration going.</p></div></article>
           </div>
         </div>
       </section>
@@ -785,32 +649,12 @@
               <span class="eyebrow">Our story</span>
               <h2>A few chapters from our journey</h2>
             </div>
-            <p class="section-copy">
-              The moments that brought us here, from our first coffee to the proposal that changed everything.
-            </p>
+            <p class="section-copy">The moments that brought us here, from our first coffee to the proposal that changed everything.</p>
           </div>
           <div class="story-grid">
-            <article class="story-card">
-              <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=900&q=80" alt="Couple walking together" />
-              <div class="content">
-                <h3>How we met</h3>
-                <p>We met by chance at a neighborhood café and talked until closing, knowing something special had begun.</p>
-              </div>
-            </article>
-            <article class="story-card">
-              <img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=900&q=80" alt="Couple laughing outdoors" />
-              <div class="content">
-                <h3>The adventure</h3>
-                <p>From weekend road trips to quiet evenings at home, we built a life filled with laughter and intention.</p>
-              </div>
-            </article>
-            <article class="story-card">
-              <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=900&q=80" alt="Proposal moment" />
-              <div class="content">
-                <h3>The proposal</h3>
-                <p>At sunset on our favorite overlook, one question turned into the easiest and happiest answer.</p>
-              </div>
-            </article>
+            <article class="story-card"><img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=900&q=80" alt="Couple walking together" /><div class="content"><h3>How we met</h3><p>We met by chance at a neighborhood café and talked until closing, knowing something special had begun.</p></div></article>
+            <article class="story-card"><img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=900&q=80" alt="Couple laughing outdoors" /><div class="content"><h3>The adventure</h3><p>From weekend road trips to quiet evenings at home, we built a life filled with laughter and intention.</p></div></article>
+            <article class="story-card"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=900&q=80" alt="Proposal moment" /><div class="content"><h3>The proposal</h3><p>At sunset on our favorite overlook, one question turned into the easiest and happiest answer.</p></div></article>
           </div>
         </div>
       </section>
@@ -820,34 +664,14 @@
           <div>
             <span class="eyebrow">RSVP</span>
             <h2>We would love to celebrate with you</h2>
-            <p class="section-copy">
-              Kindly reply by May 15, 2026. Let us know whether you can attend and share any dietary needs or notes for the weekend.
-            </p>
-            <div class="panel">
-              <h3>Travel notes</h3>
-              <p>Complimentary valet parking will be available. A hotel block has been reserved at The Marigold House, ten minutes from the venue.</p>
-            </div>
+            <p class="section-copy">Kindly reply by May 15, 2026. Let us know whether you can attend and share any dietary needs or notes for the weekend.</p>
+            <div class="panel"><h3>Travel notes</h3><p>Complimentary valet parking will be available. A hotel block has been reserved at The Marigold House, ten minutes from the venue.</p></div>
           </div>
           <form class="panel">
-            <label>
-              <span class="label">Full name</span>
-              <input type="text" placeholder="Your name" />
-            </label>
-            <label>
-              <span class="label">Email address</span>
-              <input type="email" placeholder="you@example.com" />
-            </label>
-            <label>
-              <span class="label">Attendance</span>
-              <select>
-                <option>Joyfully accepts</option>
-                <option>Regretfully declines</option>
-              </select>
-            </label>
-            <label>
-              <span class="label">Message or dietary notes</span>
-              <textarea placeholder="Share a note with the couple"></textarea>
-            </label>
+            <label><span class="label">Full name</span><input type="text" placeholder="Your name" /></label>
+            <label><span class="label">Email address</span><input type="email" placeholder="you@example.com" /></label>
+            <label><span class="label">Attendance</span><select><option>Joyfully accepts</option><option>Regretfully declines</option></select></label>
+            <label><span class="label">Message or dietary notes</span><textarea placeholder="Share a note with the couple"></textarea></label>
             <button type="submit">Send RSVP</button>
           </form>
         </div>
@@ -862,22 +686,10 @@
             </div>
           </div>
           <div class="faq-grid">
-            <article class="faq-item">
-              <h3>Can I bring a guest?</h3>
-              <p>Please refer to your invitation. We are keeping the celebration intimate and appreciate your understanding.</p>
-            </article>
-            <article class="faq-item">
-              <h3>Are children invited?</h3>
-              <p>While we adore your little ones, the wedding weekend will be an adults-only celebration unless otherwise noted.</p>
-            </article>
-            <article class="faq-item">
-              <h3>Will the ceremony be outdoors?</h3>
-              <p>Yes. The ceremony will take place in the garden, followed by an indoor-outdoor reception in the pavilion.</p>
-            </article>
-            <article class="faq-item">
-              <h3>What if I have dietary restrictions?</h3>
-              <p>Please include them in your RSVP and we will make every effort to accommodate you.</p>
-            </article>
+            <article class="faq-item"><h3>Can I bring a guest?</h3><p>Please refer to your invitation. We are keeping the celebration intimate and appreciate your understanding.</p></article>
+            <article class="faq-item"><h3>Are children invited?</h3><p>While we adore your little ones, the wedding weekend will be an adults-only celebration unless otherwise noted.</p></article>
+            <article class="faq-item"><h3>Will the ceremony be outdoors?</h3><p>Yes. The ceremony will take place in the garden, followed by an indoor-outdoor reception in the pavilion.</p></article>
+            <article class="faq-item"><h3>What if I have dietary restrictions?</h3><p>Please include them in your RSVP and we will make every effort to accommodate you.</p></article>
           </div>
         </div>
       </section>
@@ -885,26 +697,9 @@
 
     <footer class="footer">
       <div class="container footer-grid">
-        <div>
-          <h3>Jayleen & Seann</h3>
-          <p>Thank you for being part of our story. We cannot wait to celebrate with you.</p>
-        </div>
-        <div>
-          <h3>Quick links</h3>
-          <ul>
-            <li><a href="#details">Details</a></li>
-            <li><a href="#schedule">Schedule</a></li>
-            <li><a href="#rsvp">RSVP</a></li>
-          </ul>
-        </div>
-        <div>
-          <h3>Contact</h3>
-          <ul>
-            <li>hello@ourwedding.com</li>
-            <li>@avaandethan</li>
-            <li>Austin, Texas</li>
-          </ul>
-        </div>
+        <div><h3>Jayleen & Seann</h3><p>Thank you for being part of our story. We cannot wait to celebrate with you.</p></div>
+        <div><h3>Quick links</h3><ul><li><a href="#details">Details</a></li><li><a href="#schedule">Schedule</a></li><li><a href="#rsvp">RSVP</a></li></ul></div>
+        <div><h3>Contact</h3><ul><li>hello@ourwedding.com</li><li>@jayleenandseann</li><li>Austin, Texas</li></ul></div>
       </div>
     </footer>
   </div>
@@ -912,51 +707,47 @@
   <script>
     (function () {
       const targetDate = new Date('2026-06-27T00:00:00');
+      const intro = document.getElementById('intro');
+      const page = document.getElementById('page');
+      const openEnvelope = document.getElementById('openEnvelope');
+      const envelopeRoot = document.getElementById('envelopeRoot');
       const daysEl = document.getElementById('days');
       const hoursEl = document.getElementById('hours');
       const minutesEl = document.getElementById('minutes');
       const secondsEl = document.getElementById('seconds');
-      const launchScreen = document.getElementById('launchScreen');
-      const envelopeButton = document.getElementById('envelopeButton');
-      const envelopeShell = document.getElementById('envelopeShell');
-      const mainPage = document.getElementById('mainPage');
 
       function updateCountdown() {
         const now = new Date();
         const diff = targetDate - now;
-
         if (diff <= 0) {
           daysEl.textContent = '0';
-          hoursEl.textContent = '0';
-          minutesEl.textContent = '0';
-          secondsEl.textContent = '0';
+          hoursEl.textContent = '00';
+          minutesEl.textContent = '00';
+          secondsEl.textContent = '00';
           return;
         }
-
         const totalSeconds = Math.floor(diff / 1000);
         const days = Math.floor(totalSeconds / 86400);
         const hours = Math.floor((totalSeconds % 86400) / 3600);
         const minutes = Math.floor((totalSeconds % 3600) / 60);
         const seconds = totalSeconds % 60;
-
         daysEl.textContent = String(days);
         hoursEl.textContent = String(hours).padStart(2, '0');
         minutesEl.textContent = String(minutes).padStart(2, '0');
         secondsEl.textContent = String(seconds).padStart(2, '0');
       }
 
-      function openInvitation() {
-        envelopeShell.classList.add('opening');
-        document.body.classList.add('page-open');
-
+      function revealPage() {
+        envelopeRoot.classList.add('opening');
+        document.body.classList.add('invitation-open');
         setTimeout(function () {
-          launchScreen.classList.add('hidden');
-          mainPage.classList.add('visible');
+          intro.classList.add('hidden');
+          page.classList.add('visible');
           window.location.hash = '#top';
-        }, 850);
+        }, 900);
       }
 
-      envelopeButton.addEventListener('click', openInvitation, { once: true });
+      openEnvelope.addEventListener('click', revealPage, { once: true });
       updateCountdown();
       setInterval(updateCountdown, 1000);
     })();
