@@ -460,8 +460,8 @@
     }
 
     .button:hover, button:hover {
-      background: #8f6b52;
-      transform: translateY(-1px);
+      transform: none;       /* remove movement */
+      background: transparent; /* ensure no brown appears */
     }
 
     .hero { padding: 5.5rem 0 4rem; }
@@ -651,39 +651,24 @@
   </style>
 </head>
 <body>
+  <!-- Launch page -->
   <section class="intro" id="intro">
     <div class="intro-card">
       <span class="eyebrow">Save the date</span>
-      <h1>Open our invitation.</h1>
-      <p>Click the envelope to unveil our wedding website with the details, RSVP, and live countdown to June 27, 2026.</p>
+      <h1>Our Invitation</h1>
+      <p>Click the envelope to enter our wedding website with details, RSVP, and countdown to June 27, 2026.</p>
 
       <div class="envelope-scene">
-        <button class="envelope-button" id="openEnvelope" aria-label="Open invitation">
+        <button class="envelope-button" id="openEnvelope" aria-label="Enter invitation">
           <div class="envelope" id="envelopeRoot">
             <div class="envelope-back">
               <div class="back-address">
-                <div>
-                  <strong>Jayleen and Seann</strong>
-                  <span>June 27th, 2026</span>
-                </div>
               </div>
             </div>
-
-            <div class="letter-slot">
-              <div class="letter">
-                <div class="letter-inner">
-                  <strong>Jayleen &amp; Seann</strong>
-                  <span>Save the Date</span>
-                </div>
-              </div>
-            </div>
-
             <div class="front-pocket">
               <div class="front-pocket-center"></div>
             </div>
-
             <div class="top-flap"></div>
-
             <div class="seal">
               <svg viewBox="0 0 100 100" aria-hidden="true">
                 <defs>
@@ -695,8 +680,6 @@
                   </radialGradient>
                 </defs>
                 <path d="M50 6 C57 9,61 4,68 8 C74 12,82 12,87 19 C92 26,98 31,96 40 C95 48,100 54,96 62 C92 69,93 77,86 83 C79 88,75 95,66 94 C58 94,53 99,45 96 C37 93,29 97,22 91 C16 86,8 84,6 75 C4 67,-1 61,2 53 C5 45,1 37,5 30 C9 23,10 14,18 11 C26 8,32 4,40 7 C44 8,47 6,50 6 Z" fill="url(#wax)"/>
-                <path d="M19 29 C31 16,47 12,63 16 C79 20,89 35,88 50 C87 66,77 80,60 84 C44 88,27 84,17 71 C8 59,8 42,19 29 Z" fill="none" stroke="rgba(103,40,40,0.28)" stroke-width="2.3"/>
-                <ellipse cx="34" cy="26" rx="14" ry="10" fill="rgba(255,255,255,0.16)"/>
                 <circle cx="50" cy="50" r="23" fill="rgba(115,48,48,0.22)" stroke="rgba(255,245,238,0.12)" />
                 <text x="50" y="56" text-anchor="middle" fill="#fff3ea" font-family="Georgia, serif" font-size="18" letter-spacing="2">J&amp;S</text>
               </svg>
@@ -704,8 +687,6 @@
           </div>
         </button>
       </div>
-
-      <div class="hint">Click to open invitation</div>
     </div>
   </section>
 
@@ -790,30 +771,31 @@
             <p class="section-copy">Kindly reply by May 15, 2026. Let us know whether you can attend and share any dietary needs or notes for the weekend.</p>
             <div class="panel"><h3>Travel notes</h3><p>Complimentary valet parking will be available. A hotel block has been reserved at The Marigold House, ten minutes from the venue.</p></div>
           </div>
-          <form class="panel">
-            <label><span class="label">Full name</span><input type="text" placeholder="Your name" /></label>
-            <label><span class="label">Email address</span><input type="email" placeholder="you@example.com" /></label>
-            <label><span class="label">Attendance</span><select><option>Joyfully accepts</option><option>Regretfully declines</option></select></label>
-            <label><span class="label">Message or dietary notes</span><textarea placeholder="Share a note with the couple"></textarea></label>
+      
+          <!-- Formspree RSVP Form -->
+          <form class="panel" id="rsvpForm" action="https://formspree.io/f/mreywlrq" method="POST">
+            <label>
+              <span class="label">Full name</span>
+              <input type="text" name="name" placeholder="Your name" required />
+            </label>
+            <label>
+              <span class="label">Email address</span>
+              <input type="email" name="email" placeholder="you@example.com" required />
+            </label>
+            <label>
+              <span class="label">Attendance</span>
+              <select name="attendance" required>
+                <option value="Joyfully accepts">Joyfully accepts</option>
+                <option value="Regretfully declines">Regretfully declines</option>
+              </select>
+            </label>
+            <label>
+              <span class="label">Message or dietary notes</span>
+              <textarea name="message" placeholder="Share a note with the couple"></textarea>
+            </label>
             <button type="submit">Send RSVP</button>
+            <p id="rsvpMessage" style="display:none; margin-top:1rem; color:green;">Thank you for your RSVP! We can’t wait to celebrate with you.</p>
           </form>
-        </div>
-      </section>
-
-      <section id="faq">
-        <div class="container">
-          <div class="section-head">
-            <div>
-              <span class="eyebrow">FAQ</span>
-              <h2>Helpful answers before the big day</h2>
-            </div>
-          </div>
-          <div class="faq-grid">
-            <article class="faq-item"><h3>Can I bring a guest?</h3><p>Please refer to your invitation. We are keeping the celebration intimate and appreciate your understanding.</p></article>
-            <article class="faq-item"><h3>Are children invited?</h3><p>While we adore your little ones, the wedding weekend will be an adults-only celebration unless otherwise noted.</p></article>
-            <article class="faq-item"><h3>Will the ceremony be outdoors?</h3><p>Yes. The ceremony will take place in the garden, followed by an indoor-outdoor reception in the pavilion.</p></article>
-            <article class="faq-item"><h3>What if I have dietary restrictions?</h3><p>Please include them in your RSVP and we will make every effort to accommodate you.</p></article>
-          </div>
         </div>
       </section>
     </main>
@@ -828,8 +810,47 @@
   </div>
 
   <script>
+    const rsvpForm = document.getElementById('rsvpForm');
+    const rsvpMessage = document.getElementById('rsvpMessage');
+
+    rsvpForm.addEventListener('submit', async function (e) {
+      e.preventDefault(); // prevent default form submission
+      const formData = new FormData(rsvpForm);
+
+      try {
+        const response = await fetch(rsvpForm.action, {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (response.ok) {
+          rsvpForm.reset(); // clear form fields
+          rsvpMessage.style.display = 'block'; // show thank-you message
+        } else {
+          alert("Oops! There was a problem submitting your RSVP. Please try again.");
+        }
+      } catch (error) {
+        alert("Oops! There was a problem submitting your RSVP. Please try again.");
+        console.error(error);
+      }
+    });
+
+    const intro = document.getElementById('intro');
+    const page = document.getElementById('page');
+    const openEnvelope = document.getElementById('openEnvelope');
+
+    openEnvelope.addEventListener('click', () => {
+      intro.classList.add('hidden');
+      page.classList.add('visible');
+      document.body.classList.add('invitation-open');
+      window.location.hash = '#top';
+    });
+    
     (function () {
-      const targetDate = new Date('2026-06-27T00:00:00');
+      // Target date: June 27, 2026, 6:30 PM CDT (UTC-5)
+      const targetDate = new Date('2026-06-27T18:30:00-05:00');
+
       const intro = document.getElementById('intro');
       const page = document.getElementById('page');
       const openEnvelope = document.getElementById('openEnvelope');
@@ -864,6 +885,23 @@
         minutesEl.textContent = String(minutes).padStart(2, '0');
         secondsEl.textContent = String(seconds).padStart(2, '0');
       }
+
+      // Initial call and interval
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+
+      // Envelope click
+      openEnvelope.addEventListener('click', () => {
+        if (isOpening) return;
+        isOpening = true;
+        envelopeRoot.classList.add('opening');
+        setTimeout(() => {
+          intro.classList.add('hidden');
+          page.classList.add('visible');
+          document.body.classList.add('invitation-open');
+          window.location.hash = '#top';
+        }, 1400); // matches flap animation
+      });
 
       function revealPage() {
         if (isOpening) return;
