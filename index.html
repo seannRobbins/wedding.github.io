@@ -47,7 +47,7 @@
       place-items: center;
       padding: 2rem;
       background:
-        linear-gradient(rgba(247, 240, 233, 0.7), rgba(247, 240, 233, 0.92)),
+        linear-gradient(rgba(247, 240, 233, 0.72), rgba(247, 240, 233, 0.92)),
         url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1800&q=80') center/cover;
       transition: opacity 0.9s ease, visibility 0.9s ease;
     }
@@ -97,8 +97,9 @@
       display: grid;
       place-items: center;
       margin: 0 auto;
-      width: min(92vw, 520px);
-      perspective: 1400px;
+      width: min(92vw, 540px);
+      perspective: 1800px;
+      perspective-origin: 50% 30%;
     }
 
     .envelope-button {
@@ -111,40 +112,109 @@
       transition: transform 0.25s ease;
     }
 
-    .envelope-button:hover { transform: translateY(-4px) scale(1.01); }
+    .envelope-button:hover {
+      transform: translateY(-4px) scale(1.01);
+    }
 
     .envelope {
       position: relative;
       width: 100%;
       aspect-ratio: 1.28 / 1;
-      filter: drop-shadow(0 24px 50px rgba(59, 39, 26, 0.18));
+      transform-style: preserve-3d;
+      filter: drop-shadow(0 24px 50px rgba(59, 39, 26, 0.2));
+      transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    .envelope-svg {
-      width: 100%;
-      height: 100%;
+    .envelope-back {
+      position: absolute;
+      inset: 11% 8.5% 11%;
+      border-radius: 18px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.45), rgba(255,255,255,0) 24%),
+        linear-gradient(180deg, #f2e3d2 0%, #e3ceb8 100%);
+      border: 1px solid rgba(92, 64, 45, 0.12);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.65),
+        0 16px 28px rgba(78, 55, 38, 0.08);
+      overflow: hidden;
+    }
+
+    .envelope-back::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.16), transparent 35%),
+        radial-gradient(circle at top left, rgba(255,255,255,0.12), transparent 30%);
+      pointer-events: none;
+    }
+
+    .back-address {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 1.2rem;
+      text-align: center;
+      z-index: 1;
+    }
+
+    .back-address strong {
       display: block;
-      overflow: visible;
+      font-size: clamp(1.45rem, 2.8vw, 2rem);
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      margin-bottom: 0.35rem;
+      color: #5a4032;
+    }
+
+    .back-address span {
+      display: block;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .letter-slot {
+      position: absolute;
+      left: 50%;
+      bottom: 17%;
+      width: 70%;
+      height: 58%;
+      transform: translateX(-50%);
+      overflow: hidden;
+      z-index: 2;
+      border-radius: 14px 14px 0 0;
+      pointer-events: none;
     }
 
     .letter {
       position: absolute;
       left: 50%;
-      bottom: 14%;
-      width: 68%;
-      height: 66%;
-      transform: translateX(-50%);
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      transform: translateX(-50%) translateY(78%);
+      transform-origin: center bottom;
       border-radius: 18px 18px 12px 12px;
       background:
-        linear-gradient(180deg, rgba(255,255,255,0.75), rgba(255,255,255,0) 24%),
-        repeating-linear-gradient(0deg, rgba(124, 92, 71, 0.03) 0 2px, rgba(255,255,255,0.25) 2px 5px),
-        linear-gradient(180deg, #fffdf8 0%, #fff7ee 100%);
+        linear-gradient(180deg, rgba(255,255,255,0.84), rgba(255,255,255,0) 22%),
+        repeating-linear-gradient(0deg, rgba(124, 92, 71, 0.03) 0 2px, rgba(255,255,255,0.26) 2px 5px),
+        linear-gradient(180deg, #fffefb 0%, #fff7ee 100%);
       border: 1px solid rgba(92, 64, 45, 0.08);
-      box-shadow: 0 12px 28px rgba(78, 55, 38, 0.1), inset 0 1px 0 rgba(255,255,255,0.72);
+      box-shadow:
+        0 12px 28px rgba(78, 55, 38, 0.1),
+        inset 0 1px 0 rgba(255,255,255,0.72);
       display: grid;
       place-items: center;
-      z-index: 2;
-      transition: transform 0.95s ease, opacity 0.9s ease;
+      z-index: 1;
+      opacity: 1;
+      will-change: transform, opacity;
+      transition:
+        transform 1.2s cubic-bezier(0.2, 0.9, 0.2, 1),
+        opacity 0.6s ease;
     }
 
     .letter::before,
@@ -157,48 +227,137 @@
       background: rgba(154, 106, 99, 0.22);
     }
 
-    .letter::before { top: 37%; }
-    .letter::after { top: 55%; }
+    .letter::before { top: 35%; }
+    .letter::after { top: 53%; }
 
-    .letter-inner { text-align: center; }
+    .letter-inner {
+      text-align: center;
+      transform: translateY(-1px);
+    }
+
     .letter-inner strong {
       display: block;
-      font-size: 1.55rem;
+      font-size: 1.45rem;
       font-weight: 500;
       margin-bottom: 0.35rem;
     }
 
     .letter-inner span {
       font-family: Arial, Helvetica, sans-serif;
-      font-size: 0.84rem;
+      font-size: 0.82rem;
       letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--muted);
     }
 
+    .front-pocket {
+      position: absolute;
+      left: 8.5%;
+      right: 8.5%;
+      bottom: 11%;
+      height: 48%;
+      z-index: 6;
+      pointer-events: none;
+    }
+
+    .front-pocket::before,
+    .front-pocket::after,
+    .front-pocket-center {
+      content: "";
+      position: absolute;
+      bottom: 0;
+    }
+
+    .front-pocket::before {
+      left: 0;
+      width: 50.5%;
+      height: 100%;
+      background: linear-gradient(135deg, #efdece 0%, #e3cbb4 100%);
+      clip-path: polygon(0 0, 100% 100%, 0 100%);
+      border-bottom-left-radius: 18px;
+      box-shadow: inset 1px -1px 0 rgba(255,255,255,0.2);
+    }
+
+    .front-pocket::after {
+      right: 0;
+      width: 50.5%;
+      height: 100%;
+      background: linear-gradient(225deg, #efdece 0%, #e3cbb4 100%);
+      clip-path: polygon(100% 0, 100% 100%, 0 100%);
+      border-bottom-right-radius: 18px;
+      box-shadow: inset -1px -1px 0 rgba(255,255,255,0.2);
+    }
+
+    .front-pocket-center {
+      left: 0;
+      width: 100%;
+      height: 56%;
+      background: linear-gradient(180deg, #ead6c1 0%, #e2cab3 100%);
+      clip-path: polygon(0 100%, 50% 0, 100% 100%);
+      opacity: 0.97;
+    }
+
     .top-flap {
       position: absolute;
-      inset: 0;
-      z-index: 5;
+      left: 8.5%;
+      right: 8.5%;
+      top: 11%;
+      height: 39%;
+      z-index: 7;
       transform-origin: top center;
+      transform: rotateX(0deg);
       transform-style: preserve-3d;
-      transition: transform 0.95s ease;
+      backface-visibility: hidden;
+      will-change: transform;
+      transition: transform 1s cubic-bezier(0.34, 1.56, 0.64, 1);
       pointer-events: none;
+    }
+
+    .top-flap::before,
+    .top-flap::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      clip-path: polygon(0 0, 50% 100%, 100% 0);
+      border-radius: 16px 16px 0 0;
+    }
+
+    .top-flap::before {
+      background: linear-gradient(180deg, #f8eddf 0%, #ecd9c5 100%);
+      border: 1px solid rgba(92, 64, 45, 0.12);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.45);
+    }
+
+    .top-flap::after {
+      background: linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0));
+      transform: scale(0.9) translateY(4%);
+      opacity: 0.75;
     }
 
     .seal {
       position: absolute;
       left: 50%;
-      top: 41.5%;
-      transform: translate(-50%, -50%);
-      width: 88px;
-      height: 88px;
-      z-index: 7;
-      transition: transform 0.95s ease, opacity 0.7s ease;
+      top: 43.5%;
+      transform: translate(-50%, -50%) scale(1);
+      transform-origin: center center;
+      width: 86px;
+      height: 86px;
+      z-index: 8;
+      opacity: 1;
+      will-change: transform, opacity, filter;
+      transition:
+        transform 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.35s ease,
+        filter 0.35s ease;
       pointer-events: none;
     }
 
-    .seal svg { width: 100%; height: 100%; display: block; }
+    .seal svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      filter: drop-shadow(0 8px 12px rgba(90, 45, 45, 0.22));
+    }
 
     .hint {
       margin-top: 1.35rem;
@@ -215,6 +374,7 @@
       font-size: 0.92rem;
       letter-spacing: 0.04em;
       backdrop-filter: blur(10px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
     }
 
     .hint::before {
@@ -223,9 +383,24 @@
       font-size: 0.95rem;
     }
 
-    .opening .top-flap { transform: rotateX(178deg); }
-    .opening .letter { transform: translateX(-50%) translateY(-145px); opacity: 0; }
-    .opening .seal { transform: translate(-50%, -50%) scale(0.86); opacity: 0; }
+    .opening {
+      transform: translateY(-6px);
+    }
+
+    .opening .seal {
+      transform: translate(-50%, -38%) scale(0.72) rotate(-12deg);
+      opacity: 0;
+      filter: blur(1px);
+    }
+
+    .opening .top-flap {
+      transform: rotateX(-178deg);
+    }
+
+    .opening .letter {
+      transform: translateX(-50%) translateY(8%);
+      transition-delay: 0.4s, 0s;
+    }
 
     .page {
       opacity: 0;
@@ -461,7 +636,7 @@
       .hero-grid, .rsvp-wrap, .details-grid, .story-grid, .faq-grid, .footer-grid { grid-template-columns: 1fr; }
       .timeline-item { grid-template-columns: 1fr; }
       .hero-image { min-height: 380px; }
-      .seal { width: 78px; height: 78px; }
+      .seal { width: 76px; height: 76px; }
     }
 
     @media (max-width: 640px) {
@@ -469,8 +644,9 @@
       .countdown { grid-template-columns: repeat(2, 1fr); }
       .hero { padding-top: 3.5rem; }
       .section-head { flex-direction: column; align-items: flex-start; }
-      .seal { width: 68px; height: 68px; top: 41%; }
-      .letter { width: 74%; }
+      .seal { width: 66px; height: 66px; top: 43%; }
+      .back-address strong { font-size: 1.2rem; }
+      .back-address span { font-size: 0.74rem; letter-spacing: 0.14em; }
     }
   </style>
 </head>
@@ -484,48 +660,29 @@
       <div class="envelope-scene">
         <button class="envelope-button" id="openEnvelope" aria-label="Open invitation">
           <div class="envelope" id="envelopeRoot">
-            <div class="letter">
-              <div class="letter-inner">
-                <strong>Jayleen & Seann</strong>
-                <span>June 27, 2026</span>
+            <div class="envelope-back">
+              <div class="back-address">
+                <div>
+                  <strong>Jayleen and Seann</strong>
+                  <span>June 27th, 2026</span>
+                </div>
               </div>
             </div>
 
-            <svg class="envelope-svg" viewBox="0 0 520 406" aria-hidden="true">
-              <defs>
-                <linearGradient id="paperBase" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#f3e5d7"/>
-                  <stop offset="100%" stop-color="#e6d2bc"/>
-                </linearGradient>
-                <linearGradient id="paperSide" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stop-color="#efdece"/>
-                  <stop offset="100%" stop-color="#e3cbb4"/>
-                </linearGradient>
-                <linearGradient id="paperTop" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#f8eddf"/>
-                  <stop offset="100%" stop-color="#ecd9c5"/>
-                </linearGradient>
-                <filter id="grain" x="-10%" y="-10%" width="120%" height="120%">
-                  <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" stitchTiles="stitch" result="noise" />
-                  <feColorMatrix in="noise" type="saturate" values="0" />
-                  <feComponentTransfer>
-                    <feFuncA type="table" tableValues="0 0.03" />
-                  </feComponentTransfer>
-                </filter>
-              </defs>
+            <div class="letter-slot">
+              <div class="letter">
+                <div class="letter-inner">
+                  <strong>Jayleen &amp; Seann</strong>
+                  <span>Save the Date</span>
+                </div>
+              </div>
+            </div>
 
-              <rect x="44" y="86" width="432" height="274" rx="18" fill="url(#paperBase)" stroke="rgba(92,64,45,0.12)" />
-              <rect x="44" y="86" width="432" height="274" rx="18" fill="#fff" filter="url(#grain)" opacity="0.8" />
+            <div class="front-pocket">
+              <div class="front-pocket-center"></div>
+            </div>
 
-              <polygon points="44,360 44,122 260,360" fill="url(#paperSide)" />
-              <polygon points="476,360 476,122 260,360" fill="url(#paperSide)" />
-              <polygon points="44,360 260,214 476,360 476,360 44,360" fill="#ead6c1" opacity="0.88" />
-
-              <g class="top-flap">
-                <polygon points="44,86 260,240 476,86" fill="url(#paperTop)" stroke="rgba(92,64,45,0.12)" />
-                <polygon points="72,96 260,228 448,96" fill="#fffaf3" opacity="0.18" />
-              </g>
-            </svg>
+            <div class="top-flap"></div>
 
             <div class="seal">
               <svg viewBox="0 0 100 100" aria-hidden="true">
@@ -536,17 +693,12 @@
                     <stop offset="72%" stop-color="#8f4f4c"/>
                     <stop offset="100%" stop-color="#743a39"/>
                   </radialGradient>
-                  <radialGradient id="waxHighlight" cx="28%" cy="24%" r="30%">
-                    <stop offset="0%" stop-color="rgba(255,255,255,0.45)"/>
-                    <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
-                  </radialGradient>
                 </defs>
                 <path d="M50 6 C57 9,61 4,68 8 C74 12,82 12,87 19 C92 26,98 31,96 40 C95 48,100 54,96 62 C92 69,93 77,86 83 C79 88,75 95,66 94 C58 94,53 99,45 96 C37 93,29 97,22 91 C16 86,8 84,6 75 C4 67,-1 61,2 53 C5 45,1 37,5 30 C9 23,10 14,18 11 C26 8,32 4,40 7 C44 8,47 6,50 6 Z" fill="url(#wax)"/>
                 <path d="M19 29 C31 16,47 12,63 16 C79 20,89 35,88 50 C87 66,77 80,60 84 C44 88,27 84,17 71 C8 59,8 42,19 29 Z" fill="none" stroke="rgba(103,40,40,0.28)" stroke-width="2.3"/>
-                <path d="M50 6 C57 9,61 4,68 8 C74 12,82 12,87 19 C92 26,98 31,96 40 C95 48,100 54,96 62 C92 69,93 77,86 83 C79 88,75 95,66 94 C58 94,53 99,45 96 C37 93,29 97,22 91 C16 86,8 84,6 75 C4 67,-1 61,2 53 C5 45,1 37,5 30 C9 23,10 14,18 11 C26 8,32 4,40 7 C44 8,47 6,50 6 Z" fill="rgba(255,255,255,0.04)"/>
                 <ellipse cx="34" cy="26" rx="14" ry="10" fill="rgba(255,255,255,0.16)"/>
                 <circle cx="50" cy="50" r="23" fill="rgba(115,48,48,0.22)" stroke="rgba(255,245,238,0.12)" />
-                <text x="50" y="56" text-anchor="middle" fill="#fff3ea" font-family="Georgia, serif" font-size="18" letter-spacing="2">J&S</text>
+                <text x="50" y="56" text-anchor="middle" fill="#fff3ea" font-family="Georgia, serif" font-size="18" letter-spacing="2">J&amp;S</text>
               </svg>
             </div>
           </div>
@@ -636,7 +788,7 @@
             <article class="timeline-item"><div class="timeline-time">3:45 PM</div><div><h3>Guest arrival</h3><p>Welcome refreshments will be served in the courtyard before guests are seated for the ceremony.</p></div></article>
             <article class="timeline-item"><div class="timeline-time">4:30 PM</div><div><h3>Ceremony begins</h3><p>We exchange vows in the garden surrounded by seasonal florals and live strings.</p></div></article>
             <article class="timeline-item"><div class="timeline-time">5:15 PM</div><div><h3>Cocktail hour</h3><p>Enjoy signature drinks, passed hors d'oeuvres, and a relaxed golden-hour gathering.</p></div></article>
-            <article class="timeline-item"><div class="timeline-time">6:00 PM</div><div><h3>Dinner & toasts</h3><p>A seated dinner followed by heartfelt speeches from family and friends.</p></div></article>
+            <article class="timeline-item"><div class="timeline-time">6:00 PM</div><div><h3>Dinner &amp; toasts</h3><p>A seated dinner followed by heartfelt speeches from family and friends.</p></div></article>
             <article class="timeline-item"><div class="timeline-time">8:00 PM</div><div><h3>Dancing</h3><p>The dance floor opens with live music and late-night desserts to keep the celebration going.</p></div></article>
           </div>
         </div>
@@ -716,9 +868,12 @@
       const minutesEl = document.getElementById('minutes');
       const secondsEl = document.getElementById('seconds');
 
+      let isOpening = false;
+
       function updateCountdown() {
         const now = new Date();
         const diff = targetDate - now;
+
         if (diff <= 0) {
           daysEl.textContent = '0';
           hoursEl.textContent = '00';
@@ -726,11 +881,13 @@
           secondsEl.textContent = '00';
           return;
         }
+
         const totalSeconds = Math.floor(diff / 1000);
         const days = Math.floor(totalSeconds / 86400);
         const hours = Math.floor((totalSeconds % 86400) / 3600);
         const minutes = Math.floor((totalSeconds % 3600) / 60);
         const seconds = totalSeconds % 60;
+
         daysEl.textContent = String(days);
         hoursEl.textContent = String(hours).padStart(2, '0');
         minutesEl.textContent = String(minutes).padStart(2, '0');
@@ -738,16 +895,20 @@
       }
 
       function revealPage() {
+        if (isOpening) return;
+        isOpening = true;
+
         envelopeRoot.classList.add('opening');
         document.body.classList.add('invitation-open');
+
         setTimeout(function () {
           intro.classList.add('hidden');
           page.classList.add('visible');
           window.location.hash = '#top';
-        }, 900);
+        }, 2200);
       }
 
-      openEnvelope.addEventListener('click', revealPage, { once: true });
+      openEnvelope.addEventListener('click', revealPage);
       updateCountdown();
       setInterval(updateCountdown, 1000);
     })();
