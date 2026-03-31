@@ -609,6 +609,18 @@
       .back-address strong { font-size: 1.2rem; }
       .back-address span { font-size: 0.74rem; letter-spacing: 0.14em; }
     }
+    
+    .image-container {
+      display: flex;
+      justify-content: center; /* Optional: Centers the images within the container */
+      gap: 1px; /* Optional: Adds space between the images */
+    }
+
+    .image-container img {
+      width: 50%; /* Optional: Adjusts image width responsively */
+      /* Add other styling as needed, e.g., max-width, height, etc. */
+    }
+
   </style>
 </head>
 <body>
@@ -664,11 +676,9 @@
       <div class="container nav">
         <a href="#top" class="brand">Jayleen & Seann</a>
         <nav class="nav-links">
-          <a href="#details">Details</a>
           <a href="#schedule">Schedule</a>
           <a href="#story">Our Story</a>
           <a href="#rsvp">RSVP</a>
-          <a href="#faq">FAQ</a>
         </nav>
       </div>
     </header>
@@ -706,11 +716,11 @@
             </div>
           </div>
           <div class="timeline">
-            <article class="timeline-item"><div class="timeline-time">3:45 PM</div><div><h3>Guest arrival</h3><p>Welcome refreshments will be served in the courtyard before guests are seated for the ceremony.</p></div></article>
-            <article class="timeline-item"><div class="timeline-time">4:30 PM</div><div><h3>Ceremony begins</h3><p>We exchange vows in the garden surrounded by seasonal florals and live strings.</p></div></article>
-            <article class="timeline-item"><div class="timeline-time">5:15 PM</div><div><h3>Cocktail hour</h3><p>Enjoy signature drinks, passed hors d'oeuvres, and a relaxed golden-hour gathering.</p></div></article>
-            <article class="timeline-item"><div class="timeline-time">6:00 PM</div><div><h3>Dinner &amp; toasts</h3><p>A seated dinner followed by heartfelt speeches from family and friends.</p></div></article>
-            <article class="timeline-item"><div class="timeline-time">8:00 PM</div><div><h3>Dancing</h3><p>The dance floor opens with live music and late-night desserts to keep the celebration going.</p></div></article>
+            <article class="timeline-item"><div class="timeline-time">5:45 PM</div><div><h3>Guest arrival</h3><p>Welcome refreshments will be served in the courtyard before guests are seated for the ceremony.</p></div></article>
+            <article class="timeline-item"><div class="timeline-time">6:30 PM</div><div><h3>Ceremony begins</h3><p>Please ensure to be seating 10 minutes prior to the start of the ceremony. Late arrivals will be held until the ceremony ends.</p></div></article>
+            <article class="timeline-item"><div class="timeline-time">7:00 PM</div><div><h3>Cocktail hour</h3><p>Enjoy signature drinks, passed hors d'oeuvres, and a relaxed golden-hour gathering.</p></div></article>
+            <article class="timeline-item"><div class="timeline-time">8:00 PM</div><div><h3>Dinner &amp; toasts</h3><p>A seated dinner followed by heartfelt speeches from family and friends.</p></div></article>
+            <article class="timeline-item"><div class="timeline-time">9:00 PM - 12 AM</div><div><h3>Dancing, Drinking, and a Darn Good Time</h3><p>The dance floor opens with live music, late-night drinks, and delicious desserts to keep the celebration going.</p></div></article>
           </div>
         </div>
       </section>
@@ -722,11 +732,21 @@
               <span class="eyebrow">Our story</span>
               <h2>A few chapters from our journey</h2>
             </div>
-            <p class="section-copy">The moments that brought us here, from our first coffee to the proposal that changed everything.</p>
+            <p class="section-copy">The moments that brought us here.</p>
           </div>
           <div class="story-grid">
-            <article class="story-card"><img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=900&q=80" alt="Couple walking together" /><div class="content"><h3>How we met</h3><p>We met by chance at a neighborhood café and talked until closing, knowing something special had begun.</p></div></article>
-            <article class="story-card"><img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=900&q=80" alt="Couple laughing outdoors" /><div class="content"><h3>The adventure</h3><p>From weekend road trips to quiet evenings at home, we built a life filled with laughter and intention.</p></div></article>
+            <article class="story-card"><img src="pictures\hoco.JPG" alt="Hoco 2018" /><div class="content"><h3>HoCo 2018</h3><p>Seann racked up enough nerves to ask Jayleen out to HoCo. First time going out together.</p></div></article>
+            <article class="story-card"><img src="pictures/seniorgame.JPG" alt="Grad" /><div class="content"><h3>High School Graduation 2020</h3><p>We both participated in Band as well an Indoor drumline throughout our High School era.</p></div></article>
+            
+            <article class="story-card">
+              <div class="image-container">
+                <img src="pictures\jay_storm.jpg" alt="Description for image 1">
+                <img src="pictures\seann_storm.jpg" alt="Description for image 2">
+              </div>
+              <div class="content"><h3>Getting our Boy</h3><p>In 2022, we gained another family member in our boy, Storm.</p></div>
+            </article>
+            
+            <article class="story-card"><img src="pictures\grad.JPG" alt="Grad" /><div class="content"><h3>Graduation 2024</h3><p>We were blessed to be able to attend UT Autin together and graduate in the Spring of 2024.</p></div></article>
             <article class="story-card"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=900&q=80" alt="Proposal moment" /><div class="content"><h3>The proposal</h3><p>At sunset on our favorite overlook, one question turned into the easiest and happiest answer.</p></div></article>
           </div>
         </div>
@@ -737,8 +757,15 @@
           <div>
             <span class="eyebrow">RSVP</span>
             <h2>We would love to celebrate with you</h2>
-            <p class="section-copy">Kindly reply by May 15, 2026. Let us know whether you can attend and share any dietary needs or notes for the weekend.</p>
-            <div class="panel"><h3>Travel notes</h3><p>Complimentary valet parking will be available. A hotel block has been reserved at The Marigold House, ten minutes from the venue.</p></div>
+            <p class="section-copy">Kindly reply by May 15, 2026. Let us know whether you can attend and share any dietary needs or notes for the weekend. Please ask before assumming a plus one to the event.</p>
+            <div class="panel">
+              <h3>Venue</h3>
+                <a href="https://www.google.com/maps/place/4138+Allen-Genoa+Rd,+Pasadena,+TX+77504/data=!4m2!3m1!1s0x864098497ce4ff7d:0x3b13ead1a5e186ae?sa=X&ved=1t:242&ictx=111">4138 Allen Genoa Rd, Pasadena, Tx 77504</a>
+                <p>Parking is available at the back of the venue.</p>
+              <h3>Hotels</h3>
+                <p>CandleWood</p><a href="https://www.ihg.com/candlewood/hotels/us/en/find-hotels/select-roomrate?fromRedirect=true&qSrt=sBR&qErm=false&qSlH=HOUVA&qRms=1&qAdlt=1&qChld=0&qCiD=27&qCiMy=052026&qCoD=28&qCoMy=052026&qAAR=&qRtP=6CBARC&setPMCookies=true&qSHBrC=CW&qDest=3450%20East%20Sam%20Houston%20Parkway%20South,%20Pasadena,%20TX,%20US&qpMbw=0&qpMn=1&srb_u=1&qRmFltr=">3450 East Sam Houston Pkwy S, Pasadena, TX 77505</a>
+                <p>Fairfield Marriott</p><a href="https://www.marriott.com/reservation/rateListMenu.mi">3640 East Sam Houston Pkwy S, Pasadena, TX 77505</a>
+            </div>
           </div>
       
           <!-- Formspree RSVP Form -->
@@ -773,7 +800,7 @@
       <div class="container footer-grid">
         <div><h3>Jayleen & Seann</h3><p>Thank you for being part of our story. We cannot wait to celebrate with you.</p></div>
         <div><h3>Quick links</h3><ul><li><a href="#details">Details</a></li><li><a href="#schedule">Schedule</a></li><li><a href="#rsvp">RSVP</a></li></ul></div>
-        <div><h3>Contact</h3><ul><li>hello@ourwedding.com</li><li>@jayleenandseann</li><li>Austin, Texas</li></ul></div>
+        <div><h3>Contact</h3><ul><li>seannrobbins2302@gmail.com</li><li>956-607-3456</li><li>Houston, Texas</li></ul></div>
       </div>
     </footer>
   </div>
