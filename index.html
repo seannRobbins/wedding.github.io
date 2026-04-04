@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -19,14 +20,19 @@
 
       --card: #fffdf5;
 
-      --line: rgba(0,0,0,0.08);
-      --shadow: 0 24px 60px rgba(0,0,0,0.12);
+      --line: rgba(0, 0, 0, 0.08);
+      --shadow: 0 24px 60px rgba(0, 0, 0, 0.12);
 
       --radius: 28px;
     }
 
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
       margin: 0;
@@ -34,15 +40,24 @@
       font-family: Georgia, "Times New Roman", serif;
       color: var(--ink);
       background: #d7e5f0;
-        /* radial-gradient(circle at top, rgba(255,255,255,0.6), transparent 35%),
+      /* radial-gradient(circle at top, rgba(255,255,255,0.6), transparent 35%),
         linear-gradient(180deg, #FDFFB6 0%, #FFD6A5 100%); */
       overflow-x: hidden;
     }
 
-    body.invitation-open { overflow: auto; }
+    body.invitation-open {
+      overflow: auto;
+    }
 
-    a { color: inherit; text-decoration: none; }
-    img { display: block; max-width: 100%; }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
 
     .intro {
       position: fixed;
@@ -97,7 +112,7 @@
       font-family: Georgia, "Times New Roman", serif;
       line-height: 1.7;
     }
-    
+
     /* Letter */
     .letter {
       position: absolute;
@@ -107,11 +122,12 @@
       height: 48%;
       background: white;
       border-radius: 4px;
-      box-shadow: 0 8px 14px rgba(0,0,0,0.1);
+      box-shadow: 0 8px 14px rgba(0, 0, 0, 0.1);
       transform: translateX(-50%) translateY(78%);
-      opacity: 0;  /* hidden initially */
-      transition: transform 1.2s cubic-bezier(0.2,0.9,0.2,1),
-                  opacity 0.6s ease;
+      opacity: 0;
+      /* hidden initially */
+      transition: transform 1.2s cubic-bezier(0.2, 0.9, 0.2, 1),
+        opacity 0.6s ease;
       z-index: 5;
     }
 
@@ -123,11 +139,12 @@
       transform: translate(-50%, -50%) scale(1);
       width: 86px;
       height: 86px;
-      z-index: 8; /* above flap */
+      z-index: 8;
+      /* above flap */
       opacity: 1;
       transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1),
-                  opacity 0.35s ease,
-                  filter 0.35s ease;
+        opacity 0.35s ease,
+        filter 0.35s ease;
       pointer-events: none;
     }
 
@@ -174,8 +191,8 @@
       inset: 11% 8.5% 11%;
       border-radius: 18px;
       background:
-        linear-gradient(180deg, rgba(255,255,255,0.55), rgba(255,255,255,0) 24%),
-        linear-gradient(180deg, #ddebf6 0%, #9fb9cf 100%);
+        linear-gradient(180deg, rgba(255,255,255,0.45), rgba(255,255,255,0) 24%),
+        linear-gradient(180deg, #f2e3d2 0%, #e3ceb8 100%);
       border: 1px solid rgba(92, 64, 45, 0.12);
       box-shadow:
         inset 0 1px 0 rgba(255,255,255,0.65),
@@ -229,7 +246,6 @@
       height: 48%;
       z-index: 6;
       pointer-events: none;
-      border: 1px solid rgba(0,0,0,0.08);
     }
 
     .front-pocket::before,
@@ -244,7 +260,7 @@
       left: 0;
       width: 50.5%;
       height: 100%;
-      background: linear-gradient(135deg, #ddebf6 0%, #9fb9cf 100%);
+      background: linear-gradient(135deg, #efdece 0%, #e3cbb4 100%);
       clip-path: polygon(0 0, 100% 100%, 0 100%);
       border-bottom-left-radius: 18px;
       box-shadow: inset 1px -1px 0 rgba(255,255,255,0.2);
@@ -254,7 +270,7 @@
       right: 0;
       width: 50.5%;
       height: 100%;
-      background: linear-gradient(225deg, #ddebf6 0%, #9fb9cf 100%);
+      background: linear-gradient(225deg, #efdece 0%, #e3cbb4 100%);
       clip-path: polygon(100% 0, 100% 100%, 0 100%);
       border-bottom-right-radius: 18px;
       box-shadow: inset -1px -1px 0 rgba(255,255,255,0.2);
@@ -264,6 +280,7 @@
       left: 0;
       width: 100%;
       height: 56%;
+      background: linear-gradient(180deg, #ead6c1 0%, #e2cab3 100%);
       clip-path: polygon(0 100%, 50% 0, 100% 100%);
       opacity: 0.97;
     }
@@ -294,13 +311,13 @@
     }
 
     .top-flap::before {
-      background: linear-gradient(180deg, #ddebf6 0%, #9fb9cf 100%);
+      background: linear-gradient(180deg, #f8eddf 0%, #ecd9c5 100%);
       border: 1px solid rgba(92, 64, 45, 0.12);
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.45);
     }
 
     .top-flap::after {
-      background: linear-gradient(180deg, #ddebf6 0%, #9fb9cf 100%);
+      background: linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0));
       transform: scale(0.9) translateY(4%);
       opacity: 0.75;
     }
@@ -337,7 +354,7 @@
       gap: 0.55rem;
       padding: 0.78rem 1rem;
       border-radius: 999px;
-      background: rgba(255,255,255,0.46);
+      background: rgba(255, 255, 255, 0.46);
       border: 1px solid rgba(92, 64, 45, 0.1);
       box-shadow: 0 12px 28px rgba(71, 45, 29, 0.06);
       color: var(--muted);
@@ -379,7 +396,10 @@
       transform: translateY(0);
     }
 
-    .container { width: min(calc(100% - 2rem), 1180px); margin: 0 auto; }
+    .container {
+      width: min(calc(100% - 2rem), 1180px);
+      margin: 0 auto;
+    }
 
     .site-header {
       position: sticky;
@@ -413,7 +433,8 @@
       color: var(--muted);
     }
 
-    .button, button {
+    .button,
+    button {
       border: 0;
       border-radius: 999px;
       background: #ffffff;
@@ -425,12 +446,17 @@
       transition: transform 0.2s ease, background 0.2s ease;
     }
 
-    .button:hover, button:hover {
-      transform: none;       /* remove movement */
+    .button:hover,
+    button:hover {
+      transform: none;
+      /* remove movement */
       background: transparent;
     }
 
-    .hero { padding: 5.5rem 0 4rem; }
+    .hero {
+      padding: 5.5rem 0 4rem;
+    }
+
     .hero-grid {
       display: grid;
       grid-template-columns: 1.1fr 0.9fr;
@@ -438,8 +464,16 @@
       align-items: center;
     }
 
-    h2, h3 { margin: 0 0 1rem; line-height: 1.1; font-weight: 500; }
-    h2 { font-size: clamp(2rem, 4vw, 3.2rem); }
+    h2,
+    h3 {
+      margin: 0 0 1rem;
+      line-height: 1.1;
+      font-weight: 500;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+    }
 
     .lead {
       font-size: 1.08rem;
@@ -461,14 +495,20 @@
       border: 1px solid rgba(122, 92, 70, 0.18);
     }
 
-    .hero-card, .panel, .timeline-item, .faq-item, .story-card {
+    .hero-card,
+    .panel,
+    .timeline-item,
+    .faq-item,
+    .story-card {
       background: var(--card);
       border: 1px solid rgba(176, 138, 106, 0.14);
       box-shadow: var(--shadow);
       border-radius: var(--radius);
     }
 
-    .hero-card { overflow: hidden; }
+    .hero-card {
+      overflow: hidden;
+    }
 
     .hero-image {
       height: 100%;
@@ -476,7 +516,9 @@
       background: linear-gradient(rgba(74, 50, 37, 0.15), rgba(74, 50, 37, 0.18)), url('pictures/en-main.jpg') center/cover;
     }
 
-    section { padding: 2rem 0 4.5rem; }
+    section {
+      padding: 2rem 0 4.5rem;
+    }
 
     .section-head {
       display: flex;
@@ -492,13 +534,21 @@
       font-family: Georgia, "Times New Roman", serif;
     }
 
-    .details-grid, .story-grid, .faq-grid, .footer-grid {
+    .details-grid,
+    .story-grid,
+    .faq-grid,
+    .footer-grid {
       display: grid;
       gap: 1.4rem;
     }
 
-    .details-grid { grid-template-columns: repeat(3, 1fr); }
-    .panel { padding: 1.6rem; }
+    .details-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .panel {
+      padding: 1.6rem;
+    }
 
     .label {
       font-family: Georgia, "Times New Roman", serif;
@@ -509,7 +559,9 @@
       margin-bottom: 0.5rem;
     }
 
-    .value { font-size: 1.35rem; }
+    .value {
+      font-size: 1.35rem;
+    }
 
     .countdown {
       display: grid;
@@ -531,7 +583,11 @@
       font-weight: 500;
     }
 
-    .timeline { display: grid; gap: 1rem; }
+    .timeline {
+      display: grid;
+      gap: 1rem;
+    }
+
     .timeline-item {
       padding: 1.4rem 1.5rem;
       display: grid;
@@ -549,8 +605,13 @@
       padding-top: 0.2rem;
     }
 
-    .story-grid { grid-template-columns: repeat(3, 1fr); }
-    .story-card { overflow: hidden; }
+    .story-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .story-card {
+      overflow: hidden;
+    }
 
     .story-card img {
       height: 240px;
@@ -558,7 +619,9 @@
       object-fit: cover;
     }
 
-    .story-card .content { padding: 1.25rem; }
+    .story-card .content {
+      padding: 1.25rem;
+    }
 
     .rsvp-wrap {
       display: grid;
@@ -567,9 +630,14 @@
       align-items: start;
     }
 
-    form.panel { display: grid; gap: 1rem; }
+    form.panel {
+      display: grid;
+      gap: 1rem;
+    }
 
-    input, select, textarea {
+    input,
+    select,
+    textarea {
       width: 100%;
       padding: 0.95rem 1rem;
       border-radius: 14px;
@@ -580,11 +648,25 @@
       color: var(--ink);
     }
 
-    textarea { min-height: 120px; resize: vertical; }
-    .faq-grid { grid-template-columns: 1fr 1fr; }
-    .faq-item { padding: 1.3rem 1.4rem; }
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
 
-    .faq-item p, .panel p, .timeline-item p, .story-card p, footer p, li {
+    .faq-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .faq-item {
+      padding: 1.3rem 1.4rem;
+    }
+
+    .faq-item p,
+    .panel p,
+    .timeline-item p,
+    .story-card p,
+    footer p,
+    li {
       font-family: Georgia, "Times New Roman", serif;
       color: var(--muted);
     }
@@ -594,41 +676,97 @@
       border-top: 1px solid rgba(176, 138, 106, 0.16);
     }
 
-    .footer-grid { grid-template-columns: 1.2fr 1fr 1fr; }
-    ul { list-style: none; padding: 0; margin: 0; }
-    li + li { margin-top: 0.5rem; }
+    .footer-grid {
+      grid-template-columns: 1.2fr 1fr 1fr;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    li+li {
+      margin-top: 0.5rem;
+    }
 
     @media (max-width: 960px) {
-      .hero-grid, .rsvp-wrap, .details-grid, .story-grid, .faq-grid, .footer-grid { grid-template-columns: 1fr; }
-      .timeline-item { grid-template-columns: 1fr; }
-      .hero-image { min-height: 380px; }
-      .seal { width: 76px; height: 76px; }
+
+      .hero-grid,
+      .rsvp-wrap,
+      .details-grid,
+      .story-grid,
+      .faq-grid,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline-item {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-image {
+        min-height: 380px;
+      }
+
+      .seal {
+        width: 76px;
+        height: 76px;
+      }
     }
 
     @media (max-width: 640px) {
-      .nav { flex-direction: column; align-items: flex-start; }
-      .countdown { grid-template-columns: repeat(2, 1fr); }
-      .hero { padding-top: 3.5rem; }
-      .section-head { flex-direction: column; align-items: flex-start; }
-      .seal { width: 66px; height: 66px; top: 43%; }
-      .back-address strong { font-size: 1.2rem; }
-      .back-address span { font-size: 0.74rem; letter-spacing: 0.14em; }
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .countdown {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .hero {
+        padding-top: 3.5rem;
+      }
+
+      .section-head {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .seal {
+        width: 66px;
+        height: 66px;
+        top: 43%;
+      }
+
+      .back-address strong {
+        font-size: 1.2rem;
+      }
+
+      .back-address span {
+        font-size: 0.74rem;
+        letter-spacing: 0.14em;
+      }
     }
-    
+
     .image-container {
       display: flex;
-      justify-content: center; /* Optional: Centers the images within the container */
-      gap: 1px; /* Optional: Adds space between the images */
+      justify-content: center;
+      /* Optional: Centers the images within the container */
+      gap: 1px;
+      /* Optional: Adds space between the images */
     }
 
     .image-container img {
-      width: 50%; /* Optional: Adjusts image width responsively */
+      width: 50%;
+      /* Optional: Adjusts image width responsively */
       /* Add other styling as needed, e.g., max-width, height, etc. */
     }
-
   </style>
 </head>
 <meta property="og:image" content="pictures/en-main">
+
 <body>
   <!-- Launch page -->
   <section class="intro" id="intro">
@@ -663,13 +801,14 @@
               <svg viewBox="0 0 100 100" aria-hidden="true">
                 <defs>
                   <radialGradient id="wax" cx="50%" cy="50%" r="50%">
-                    <stop offset="0%" stop-color="#b4933c"/>
-                    <stop offset="60%" stop-color="#896815"/>
-                    <stop offset="100%" stop-color="#5f470e"/>
+                    <stop offset="0%" stop-color="#b4933c" />
+                    <stop offset="60%" stop-color="#896815" />
+                    <stop offset="100%" stop-color="#5f470e" />
                   </radialGradient>
                 </defs>
                 <circle cx="50" cy="50" r="40" fill="url(#wax)" />
-                <text x="50" y="55" text-anchor="middle" fill="#fff3ea" font-family="Georgia, serif" font-size="18">J&amp;S</text>
+                <text x="50" y="55" text-anchor="middle" fill="#fff3ea" font-family="Georgia, serif"
+                  font-size="18">J&amp;S</text>
               </svg>
             </div>
           </div>
@@ -697,7 +836,8 @@
           <div>
             <span class="eyebrow">Save the Date</span>
             <h2 style="font-size: clamp(3rem, 6vw, 5.4rem);">We're Getting Married!</h2>
-            <h2 style="font-size: clamp(1rem, 2vw, 1.5rem);">We are delighted to invite you to a joyful celebration of love, family, and forever.</h2>
+            <h2 style="font-size: clamp(1rem, 2vw, 1.5rem);">We are delighted to invite you to a joyful celebration of
+              love, family, and forever.</h2>
             <br>
             <div class="hero-actions">
               <a class="button" style="font-size: clamp(1rem, 2vw, 1.5rem);" href="#rsvp">June 27, 2026</a>
@@ -725,7 +865,7 @@
           </div>
           <div class="timeline">
             <article class="timeline-item">
-              <div class="timeline-time">5:45 PM</div>
+              <div class="timeline-time">6:00 PM</div>
               <div>
                 <h3>Guest arrival</h3>
                 <p>Guests can begin arriving and getting settled before the ceremony begins.</p>
@@ -736,7 +876,8 @@
               <div class="timeline-time">6:30 PM</div>
               <div>
                 <h3>Ceremony</h3>
-                <p>The ceremony will begin promptly at 6:30 PM. Please try to arrive a few minutes early. Late arrivals will be held until the ceremony is over.</p>
+                <p>The ceremony will begin promptly at 6:30 PM. Please try to arrive a few minutes early. Late arrivals
+                  will be held until the ceremony is over.</p>
               </div>
             </article>
 
@@ -757,10 +898,11 @@
             </article>
 
             <article class="timeline-item">
-              <div class="timeline-time">9:00 PM - 12 AM</div>
+              <div class="timeline-time">9:00 PM</div>
               <div>
                 <h3>Dancing & celebration</h3>
-                <p>The dance floor opens! Come celebrate with us as we wrap up the night with music, drinks, and plenty of dancing.</p>
+                <p>The dance floor opens! Come celebrate with us through the night with music, drinks, and plenty
+                  of dancing.</p>
               </div>
             </article>
           </div>
@@ -776,20 +918,22 @@
             </div>
           </div>
           <div class="story-grid">
-            
+
             <article class="story-card">
               <img src="pictures/hoco.jpg" alt="Hoco 2018" />
               <div class="content">
                 <h3>Home Coming 2018</h3>
-                <p>With a little courage and a lot of nerves, Seann asked Jayleen to Homecoming. That night marked their first date—and the beginning of a love story that would last far beyond high school.</p>
+                <p>With a little courage and a lot of nerves, Seann asked Jayleen to Homecoming. That night marked their
+                  first date—and the beginning of a love story that would last far beyond high school.</p>
               </div>
             </article>
-            
+
             <article class="story-card">
               <img src="pictures/seniorgame.jpg" alt="Grad" />
               <div class="content">
                 <h3>High School Years</h3>
-                <p>We spent our high school years side by side in band and indoor drumline, growing together through long rehearsals, competitions, and leadership roles that shaped who we are today.</p>
+                <p>We spent our high school years side by side in band and indoor drumline, growing together through
+                  long rehearsals, competitions, and leadership roles that shaped who we are today.</p>
               </div>
             </article>
 
@@ -798,9 +942,13 @@
                 <img src="pictures/stormbaby.jpg" alt="Description for image 1">
                 <img src="pictures/stormadult.jpg" alt="Description for image 2">
               </div>
-              <div class="content"><h3>Welcoming Storm</h3><p>In 2023, our family grew by four paws when we welcomed our boy, Storm. Our playful white husky has filled our home with even more love, laughter, and adventure.</p></div>
+              <div class="content">
+                <h3>Welcoming Storm</h3>
+                <p>In 2023, our family grew by four paws when we welcomed our boy, Storm. Our playful white husky has
+                  filled our home with even more love, laughter, and adventure.</p>
+              </div>
             </article>
-            
+
             <article class="story-card">
               <div class="image-container">
                 <img src="pictures/grad.jpg" alt="Grad" />
@@ -808,7 +956,9 @@
               </div>
               <div class="content">
                 <h3>University Years</h3>
-                <p>As high school sweethearts, our story began long before college. We were incredibly blessed to continue that journey side by side at UT Austin, where we shared four unforgettable years together and proudly graduated from UT Austin in the Spring of 2024.</p>
+                <p>As high school sweethearts, our story began long before college. We were incredibly blessed to
+                  continue that journey side by side at UT Austin, where we shared four unforgettable years together and
+                  proudly graduated from UT Austin in the Spring of 2024.</p>
               </div>
             </article>
 
@@ -819,7 +969,9 @@
               </div>
               <div class="content">
                 <h3>The Proposal</h3>
-                <p>After closing on our first home and finishing the long day of moving in, we finally had a quiet moment alone. In the stillness of our new home, Seann got down on one knee and asked Jayleen to spend forever with him.</p>
+                <p>After closing on our first home and finishing the long day of moving in, we finally had a quiet
+                  moment alone. In the stillness of our new home, Seann got down on one knee and asked Jayleen to spend
+                  forever with him.</p>
               </div>
             </article>
           </div>
@@ -831,17 +983,23 @@
           <div>
             <span class="eyebrow">RSVP</span>
             <h2>We would love to celebrate with you</h2>
-            <p class="section-copy">Kindly reply by May 15, 2026. Let us know whether you can attend and share any dietary needs or notes for the weekend. Please ask before bringing a plus one to the event.</p>
+            <p class="section-copy">Kindly reply by May 15, 2026. Let us know whether you can attend and share any
+              dietary needs or notes for the weekend. Please ask before bringing a plus one to the event.</p>
             <div class="panel">
               <h3>Venue</h3>
-                <a href="https://www.google.com/maps/place/4138+Allen-Genoa+Rd,+Pasadena,+TX+77504/data=!4m2!3m1!1s0x864098497ce4ff7d:0x3b13ead1a5e186ae?sa=X&ved=1t:242&ictx=111">4138 Allen Genoa Rd, Pasadena, Tx 77504</a>
-                <p>Parking is available at the back of the venue.</p>
+              <a
+                href="https://www.google.com/maps/place/4138+Allen-Genoa+Rd,+Pasadena,+TX+77504/data=!4m2!3m1!1s0x864098497ce4ff7d:0x3b13ead1a5e186ae?sa=X&ved=1t:242&ictx=111">4138
+                Allen Genoa Rd, Pasadena, Tx 77504</a>
+              <p>Parking is available at the back of the venue.</p>
               <h3>Hotels</h3>
-                <p>CandleWood</p><a href="https://www.ihg.com/candlewood/hotels/us/en/find-hotels/select-roomrate?fromRedirect=true&qSrt=sBR&qErm=false&qSlH=HOUVA&qRms=1&qAdlt=1&qChld=0&qCiD=27&qCiMy=052026&qCoD=28&qCoMy=052026&qAAR=&qRtP=6CBARC&setPMCookies=true&qSHBrC=CW&qDest=3450%20East%20Sam%20Houston%20Parkway%20South,%20Pasadena,%20TX,%20US&qpMbw=0&qpMn=1&srb_u=1&qRmFltr=">3450 East Sam Houston Pkwy S, Pasadena, TX 77505</a>
-                <p>Fairfield Marriott</p><a href="https://www.marriott.com/reservation/rateListMenu.mi">3640 East Sam Houston Pkwy S, Pasadena, TX 77505</a>
+              <p>CandleWood</p><a
+                href="https://www.ihg.com/candlewood/hotels/us/en/find-hotels/select-roomrate?fromRedirect=true&qSrt=sBR&qErm=false&qSlH=HOUVA&qRms=1&qAdlt=1&qChld=0&qCiD=27&qCiMy=052026&qCoD=28&qCoMy=052026&qAAR=&qRtP=6CBARC&setPMCookies=true&qSHBrC=CW&qDest=3450%20East%20Sam%20Houston%20Parkway%20South,%20Pasadena,%20TX,%20US&qpMbw=0&qpMn=1&srb_u=1&qRmFltr=">3450
+                East Sam Houston Pkwy S, Pasadena, TX 77505</a>
+              <p>Fairfield Marriott</p><a href="https://www.marriott.com/reservation/rateListMenu.mi">3640 East Sam
+                Houston Pkwy S, Pasadena, TX 77505</a>
             </div>
           </div>
-      
+
           <!-- Formspree RSVP Form -->
           <form class="panel" id="rsvpForm" action="https://formspree.io/f/mreywlrq" method="POST">
             <label>
@@ -864,7 +1022,8 @@
               <textarea name="message" placeholder="Share a note with the couple"></textarea>
             </label>
             <button type="submit">Send RSVP</button>
-            <p id="rsvpMessage" style="display:none; margin-top:1rem; color:green;">Thank you for your RSVP! We can’t wait to celebrate with you.</p>
+            <p id="rsvpMessage" style="display:none; margin-top:1rem; color:green;">Thank you for your RSVP! We can’t
+              wait to celebrate with you.</p>
           </form>
         </div>
       </section>
@@ -879,13 +1038,11 @@
 
           <div class="panel" style="text-align:center; padding:2.5rem;">
             <p class="section-copy" style="margin:0 auto 1.5rem;">
-              Your presence at our wedding is the greatest gift of all. 
+              Your presence at our wedding is the greatest gift of all.
               If you would like to celebrate with a gift, we have created a registry for your convenience.
             </p>
 
-            <a class="button" 
-              href="https://www.amazon.com/wedding/guest-view/388U2J7OA1LZ7" 
-              target="_blank"
+            <a class="button" href="https://www.amazon.com/wedding/guest-view/388U2J7OA1LZ7" target="_blank"
               style="font-size:1.1rem;">
               View Our Amazon Registry
             </a>
@@ -896,8 +1053,18 @@
 
     <footer class="footer">
       <div class="container footer-grid">
-        <div><h3>Jayleen & Seann</h3><p>Thank you for being part of our story. We cannot wait to celebrate with you.</p></div>
-        <div><h3>Contact</h3><ul><li>seannrobbins2302@gmail.com</li><li>956-607-3456</li><li>Houston, Texas</li></ul></div>
+        <div>
+          <h3>Jayleen & Seann</h3>
+          <p>Thank you for being part of our story. We cannot wait to celebrate with you.</p>
+        </div>
+        <div>
+          <h3>Contact</h3>
+          <ul>
+            <li>seannrobbins2302@gmail.com</li>
+            <li>956-607-3456</li>
+            <li>Houston, Texas</li>
+          </ul>
+        </div>
       </div>
     </footer>
   </div>
@@ -932,7 +1099,7 @@
     const intro = document.getElementById('intro');
     const page = document.getElementById('page');
     const openEnvelope = document.getElementById('openEnvelope');
-    
+
     (function () {
       // Target date: June 27, 2026, 6:30 PM CDT (UTC-5)
       const targetDate = new Date('2026-06-27T18:30:00-05:00');
@@ -992,4 +1159,5 @@
     })();
   </script>
 </body>
+
 </html>
