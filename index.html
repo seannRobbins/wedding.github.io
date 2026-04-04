@@ -763,6 +763,18 @@
       /* Optional: Adjusts image width responsively */
       /* Add other styling as needed, e.g., max-width, height, etc. */
     }
+
+    .envelope-image {
+      width: min(92vw, 520px);
+      cursor: pointer;
+      transition: transform 0.35s ease, filter 0.35s ease;
+      filter: drop-shadow(0 18px 40px rgba(0,0,0,0.18));
+    }
+
+    .envelope-image:hover {
+      transform: translateY(-6px) scale(1.02);
+    }
+
   </style>
 </head>
 <meta property="og:image" content="pictures/en-main">
@@ -776,43 +788,12 @@
       <p>Click the envelope to enter our wedding website with details, RSVP, and countdown to June 27, 2026.</p>
 
       <div class="envelope-scene">
-        <button class="envelope-button" id="openEnvelope" aria-label="Enter invitation">
-          <div class="envelope" id="envelopeRoot">
-            <!-- Envelope Back -->
-            <div class="envelope-back">
-              <div class="back-address"></div>
-            </div>
-
-            <!-- Front Pocket -->
-            <div class="front-pocket">
-              <div class="front-pocket-center"></div>
-            </div>
-
-            <!-- Top Flap -->
-            <div class="top-flap"></div>
-
-            <!-- Letter (hidden until envelope opens) -->
-            <div class="letter">
-              <div class="paper"></div>
-            </div>
-
-            <!-- Seal -->
-            <div class="seal">
-              <svg viewBox="0 0 100 100" aria-hidden="true">
-                <defs>
-                  <radialGradient id="wax" cx="50%" cy="50%" r="50%">
-                    <stop offset="0%" stop-color="#b4933c" />
-                    <stop offset="60%" stop-color="#896815" />
-                    <stop offset="100%" stop-color="#5f470e" />
-                  </radialGradient>
-                </defs>
-                <circle cx="50" cy="50" r="40" fill="url(#wax)" />
-                <text x="50" y="55" text-anchor="middle" fill="#fff3ea" font-family="Georgia, serif"
-                  font-size="18">J&amp;S</text>
-              </svg>
-            </div>
-          </div>
-        </button>
+        <img 
+          src="pictures/envelope.jpg" 
+          id="openEnvelope"
+          class="envelope-image"
+          alt="Wedding invitation envelope"
+        />
       </div>
     </div>
   </section>
@@ -1107,7 +1088,6 @@
       const intro = document.getElementById('intro');
       const page = document.getElementById('page');
       const openEnvelope = document.getElementById('openEnvelope');
-      const envelopeRoot = document.getElementById('envelopeRoot');
       const daysEl = document.getElementById('days');
       const hoursEl = document.getElementById('hours');
       const minutesEl = document.getElementById('minutes');
@@ -1143,7 +1123,6 @@
         if (isOpening) return;
         isOpening = true;
 
-        envelopeRoot.classList.add('opening');
         document.body.classList.add('invitation-open');
 
         setTimeout(function () {
