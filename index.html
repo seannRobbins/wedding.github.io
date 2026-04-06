@@ -88,6 +88,13 @@
       width: min(100%, 760px);
       text-align: center;
       margin: 0 auto;
+      position: relative;
+    }
+
+    .intro-lang-toggle {
+      position: absolute;
+      top: -80px;
+      right: 0;
     }
 
     .eyebrow {
@@ -763,6 +770,35 @@
       transform: translateY(-6px) scale(1.02);
     }
 
+    .language-toggle {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .lang-btn {
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      border: 1px solid rgba(122, 92, 70, 0.18);
+      background: transparent;
+      color: var(--ink);
+      cursor: pointer;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .lang-btn.active {
+      background: #896815;
+      color: white;
+      border-color: #896815;
+    }
+
+    .lang-btn:hover:not(.active) {
+      background: rgba(137, 104, 21, 0.1);
+    }
+
   </style>
 </head>
 <meta property="og:image" content="pictures/en-main">
@@ -771,9 +807,15 @@
   <!-- Launch page -->
   <section class="intro" id="intro">
     <div class="intro-card">
-      <span class="eyebrow">Save the date</span>
-      <h1>Our Invitation</h1>
-      <p>Click the envelope to enter our wedding website with details, RSVP, and countdown to June 27, 2026.</p>
+      <span class="eyebrow" data-en="Save the date" data-es="Guardar fecha">Save the date</span>
+      <h1 data-en="Our Invitation" data-es="Nuestra Invitación">Our Invitation</h1>
+      <p data-en="Click the envelope to enter our wedding website with details, RSVP, and countdown to June 27, 2026." data-es="Haz clic en el sobre para ingresar a nuestro sitio web de bodas con detalles, RSVP y cuenta regresiva hasta el 27 de junio de 2026.">Click the envelope to enter our wedding website with details, RSVP, and countdown to June 27, 2026.</p>
+      
+      <!-- Language Toggle in Intro -->
+      <div class="language-toggle intro-lang-toggle">
+        <button class="lang-btn active" id="langEnIntro" data-lang="en">EN</button>
+        <button class="lang-btn" id="langEsIntro" data-lang="es">ES</button>
+      </div>
 
       <div class="envelope-scene">
         <img 
@@ -791,10 +833,14 @@
       <div class="container nav">
         <a href="#top" class="brand">Jayleen & Seann</a>
         <nav class="nav-links">
-          <a href="#schedule">Schedule</a>
-          <a href="#story">Our Story</a>
-          <a href="#rsvp">RSVP</a>
-          <a href="#registry">Registry</a>
+          <a href="#schedule" data-en="Schedule" data-es="Horario">Schedule</a>
+          <a href="#story" data-en="Our Story" data-es="Nuestra Historia">Our Story</a>
+          <a href="#rsvp" data-en="RSVP" data-es="RSVP">RSVP</a>
+          <a href="#registry" data-en="Registry" data-es="Registro">Registry</a>
+          <div class="language-toggle">
+            <button class="lang-btn active" id="langEn" data-lang="en">EN</button>
+            <button class="lang-btn" id="langEs" data-lang="es">ES</button>
+          </div>
         </nav>
       </div>
     </header>
@@ -803,19 +849,18 @@
       <section class="hero">
         <div class="container hero-grid">
           <div>
-            <span class="eyebrow">Save the Date</span>
-            <h2 style="font-size: clamp(3rem, 6vw, 5.4rem);">We're Getting Married!</h2>
-            <h2 style="font-size: clamp(1rem, 2vw, 1.5rem);">We are delighted to invite you to a joyful celebration of
-              love, family, and forever.</h2>
+            <span class="eyebrow" data-en="Save the Date" data-es="Guardar la Fecha">Save the Date</span>
+            <h2 style="font-size: clamp(3rem, 6vw, 5.4rem);" data-en="We're Getting Married!" data-es="¡Nos Vamos a Casar!">We're Getting Married!</h2>
+            <h2 style="font-size: clamp(1rem, 2vw, 1.5rem);" data-en="We are delighted to invite you to a joyful celebration of love, family, and forever." data-es="Nos complace invitarle a una alegre celebración de amor, familia y para siempre.">We are delighted to invite you to a joyful celebration of love, family, and forever.</h2>
             <br>
             <div class="hero-actions">
               <a class="button" style="font-size: clamp(1rem, 2vw, 1.5rem);" href="#rsvp">June 27, 2026</a>
             </div>
             <div class="countdown" aria-label="Wedding countdown">
-              <div class="count-box"><strong id="days">--</strong><span>Days</span></div>
-              <div class="count-box"><strong id="hours">--</strong><span>Hours</span></div>
-              <div class="count-box"><strong id="minutes">--</strong><span>Minutes</span></div>
-              <div class="count-box"><strong id="seconds">--</strong><span>Seconds</span></div>
+              <div class="count-box"><strong id="days">--</strong><span data-en="Days" data-es="Días">Days</span></div>
+              <div class="count-box"><strong id="hours">--</strong><span data-en="Hours" data-es="Horas">Hours</span></div>
+              <div class="count-box"><strong id="minutes">--</strong><span data-en="Minutes" data-es="Minutos">Minutes</span></div>
+              <div class="count-box"><strong id="seconds">--</strong><span data-en="Seconds" data-es="Segundos">Seconds</span></div>
             </div>
           </div>
           <div class="hero-card">
@@ -828,49 +873,48 @@
         <div class="container">
           <div class="section-head">
             <div>
-              <span class="eyebrow">Weekend schedule</span>
-              <h2>Celebrate with us!</h2>
+              <span class="eyebrow" data-en="Weekend schedule" data-es="Horario del fin de semana">Weekend schedule</span>
+              <h2 data-en="Celebrate with us!" data-es="¡Celebra con nosotros!">Celebrate with us!</h2>
             </div>
           </div>
           <div class="timeline">
             <article class="timeline-item">
-              <div class="timeline-time">6:00 PM</div>
+              <div class="timeline-time" data-en="6:00 PM" data-es="6:00 P.M.">6:00 PM</div>
               <div>
-                <h3>Guest arrival</h3>
-                <p>Guests can begin arriving and getting settled before the ceremony begins.</p>
+                <h3 data-en="Guest arrival" data-es="Llegada de huéspedes">Guest arrival</h3>
+                <p data-en="Guests can begin arriving and getting settled before the ceremony begins." data-es="Los huéspedes pueden comenzar a llegar y acomodarse antes de que comience la ceremonia.">Guests can begin arriving and getting settled before the ceremony begins.</p>
               </div>
             </article>
 
             <article class="timeline-item">
-              <div class="timeline-time">6:30 PM</div>
+              <div class="timeline-time" data-en="6:30 PM" data-es="6:30 P.M.">6:30 PM</div>
               <div>
-                <h3>Ceremony</h3>
-                <p>The ceremony will begin promptly at 6:30 PM. Please try to arrive a few minutes early. Late arrivals
-                  will be held until the ceremony is over.</p>
+                <h3 data-en="Ceremony" data-es="Ceremonia">Ceremony</h3>
+                <p data-en="The ceremony will begin promptly at 6:30 PM. Please try to arrive a few minutes early. Late arrivals will be held until the ceremony is over." data-es="La ceremonia comenzará puntualmente a las 6:30 P.M. Por favor, intente llegar unos minutos antes. Los que lleguen tarde serán retenidos hasta que termine la ceremonia.">The ceremony will begin promptly at 6:30 PM. Please try to arrive a few minutes early. Late arrivals will be held until the ceremony is over.</p>
               </div>
             </article>
 
             <article class="timeline-item">
-              <div class="timeline-time">7:00 PM</div>
+              <div class="timeline-time" data-en="7:00 PM" data-es="7:00 P.M.">7:00 PM</div>
               <div>
-                <h3>Cocktail hour</h3>
-                <p>After the ceremony, enjoy refreshments while the couple takes photos.</p>
+                <h3 data-en="Cocktail hour" data-es="Hora de bebidas">Cocktail hour</h3>
+                <p data-en="After the ceremony, enjoy refreshments while the couple takes photos." data-es="Después de la ceremonia, disfrute de bebidas y refrescos mientras la pareja se toma fotos.">After the ceremony, enjoy refreshments while the couple takes photos.</p>
               </div>
             </article>
 
             <article class="timeline-item">
-              <div class="timeline-time">8:00 PM</div>
+              <div class="timeline-time" data-en="8:00 PM" data-es="8:00 P.M.">8:00 PM</div>
               <div>
-                <h3>Dinner &amp; toasts</h3>
-                <p>Dinner will be served followed by a few toasts from family and friends.</p>
+                <h3 data-en="Dinner &amp; toasts" data-es="Cena y brindis">Dinner &amp; toasts</h3>
+                <p data-en="Dinner will be served followed by a few toasts from family and friends." data-es="Se servirá la cena seguida de algunos brindis de familiares y amigos.">Dinner will be served followed by a few toasts from family and friends.</p>
               </div>
             </article>
 
             <article class="timeline-item">
-              <div class="timeline-time">9:00 PM</div>
+              <div class="timeline-time" data-en="9:00 PM" data-es="9:00 P.M.">9:00 PM</div>
               <div>
-                <h3>Dancing & celebration</h3>
-                <p>The dance floor opens! Lets dance the night away and celebrate together.</p>
+                <h3 data-en="Dancing & celebration" data-es="Baile y celebración">Dancing & celebration</h3>
+                <p data-en="The dance floor opens! Lets dance the night away and celebrate together." data-es="¡La pista de baile abre! Bailemos toda la noche y celebremos juntos.">The dance floor opens! Lets dance the night away and celebrate together.</p>
               </div>
             </article>
           </div>
@@ -881,8 +925,8 @@
         <div class="container">
           <div class="section-head">
             <div>
-              <span class="eyebrow">Our story</span>
-              <h2>A few chapters from our journey...</h2>
+              <span class="eyebrow" data-en="Our story" data-es="Nuestra historia">Our story</span>
+              <h2 data-en="A few chapters from our journey..." data-es="Algunos capítulos de nuestro viaje...">A few chapters from our journey...</h2>
             </div>
           </div>
           <div class="story-grid">
@@ -890,18 +934,16 @@
             <article class="story-card">
               <img src="pictures/hoco.jpg" alt="Hoco 2018" />
               <div class="content">
-                <h3>Home Coming 2018</h3>
-                <p>With a little courage and a lot of nerves, Seann asked Jayleen to Homecoming. That night marked their
-                  first date—and the beginning of a love story that would last far beyond high school.</p>
+                <h3 data-en="Home Coming 2018" data-es="Homecoming 2018">Home Coming 2018</h3>
+                <p data-en="With a little courage and a lot of nerves, Seann asked Jayleen to Homecoming. That night marked their first date—and the beginning of a love story that would last far beyond high school." data-es="Con un poco de coraje y muchos nervios, Seann le pidió a Jayleen que fuera al Homecoming. Esa noche marcó su primera cita, el comienzo de una historia de amor que duraría mucho más allá de la secundaria.">With a little courage and a lot of nerves, Seann asked Jayleen to Homecoming. That night marked their first date—and the beginning of a love story that would last far beyond high school.</p>
               </div>
             </article>
 
             <article class="story-card">
               <img src="pictures/seniorgame.jpg" alt="Grad" />
               <div class="content">
-                <h3>High School Years</h3>
-                <p>We spent our high school years side by side in band and indoor drumline, growing together through
-                  long rehearsals, competitions, and leadership roles that shaped who we are today.</p>
+                <h3 data-en="High School Years" data-es="Años de Secundaria">High School Years</h3>
+                <p data-en="We spent our high school years side by side in band and indoor drumline, growing together through long rehearsals, competitions, and leadership roles that shaped who we are today." data-es="Pasamos nuestros años de secundaria juntos en la banda e indoor drumline, creciendo juntos a través de ensayos largos, competencias y papeles de liderazgo que nos moldearon.">We spent our high school years side by side in band and indoor drumline, growing together through long rehearsals, competitions, and leadership roles that shaped who we are today.</p>
               </div>
             </article>
 
@@ -911,9 +953,8 @@
                 <img src="pictures/stormadult.jpg" alt="Description for image 2">
               </div>
               <div class="content">
-                <h3>Welcoming Storm</h3>
-                <p>In 2023, our family grew by four paws when we welcomed our boy, Storm. Our playful white husky has
-                  filled our home with even more love, laughter, and adventure.</p>
+                <h3 data-en="Welcoming Storm" data-es="Bienvenido Storm">Welcoming Storm</h3>
+                <p data-en="In 2023, our family grew by four paws when we welcomed our boy, Storm. Our playful white husky has filled our home with even more love, laughter, and adventure." data-es="En 2023, nuestra familia creció de cuatro patas cuando recibimos a nuestro niño, Storm. Nuestro travieso husky blanco ha llenado nuestro hogar con aún más amor, risas y aventura.">In 2023, our family grew by four paws when we welcomed our boy, Storm. Our playful white husky has filled our home with even more love, laughter, and adventure.</p>
               </div>
             </article>
 
@@ -923,10 +964,8 @@
                 <img src="pictures/grad2.jpg" alt="Grad2" />
               </div>
               <div class="content">
-                <h3>University Years</h3>
-                <p>As high school sweethearts, our story began long before college. We were incredibly blessed to
-                  continue that journey side by side at UT Austin, where we shared four unforgettable years together and
-                  proudly graduated from UT Austin in the Spring of 2024.</p>
+                <h3 data-en="University Years" data-es="Años Universitarios">University Years</h3>
+                <p data-en="As high school sweethearts, our story began long before college. We were incredibly blessed to continue that journey side by side at UT Austin, where we shared four unforgettable years together and proudly graduated from UT Austin in the Spring of 2024." data-es="Como enamorados de la secundaria, nuestra historia comenzó mucho antes de la universidad. Fuimos increíblemente afortunados de continuar ese viaje juntos en UT Austin, donde compartimos cuatro años inolvidables y nos graduamos orgullosamente de UT Austin en la Primavera de 2024.">As high school sweethearts, our story began long before college. We were incredibly blessed to continue that journey side by side at UT Austin, where we shared four unforgettable years together and proudly graduated from UT Austin in the Spring of 2024.</p>
               </div>
             </article>
 
@@ -936,10 +975,8 @@
                 <img src="pictures/en-ring.jpg" alt="en2" />
               </div>
               <div class="content">
-                <h3>The Proposal</h3>
-                <p>After closing on our first home and finishing the long day of moving in, we finally had a quiet
-                  moment alone. In the stillness of our new home, Seann got down on one knee and asked Jayleen to spend
-                  forever with him.</p>
+                <h3 data-en="The Proposal" data-es="La Propuesta">The Proposal</h3>
+                <p data-en="After closing on our first home and finishing the long day of moving in, we finally had a quiet moment alone. In the stillness of our new home, Seann got down on one knee and asked Jayleen to spend forever with him." data-es="Después de cerrar el trato de nuestra primera casa y terminar el largo día de mudanza, finalmente tuvimos un momento tranquilo solos. En la quietud de nuestro nuevo hogar, Seann se arrodilló y le pidió a Jayleen que pasara la eternidad con él.">After closing on our first home and finishing the long day of moving in, we finally had a quiet moment alone. In the stillness of our new home, Seann got down on one knee and asked Jayleen to spend forever with him.</p>
               </div>
             </article>
           </div>
@@ -949,19 +986,19 @@
       <section id="rsvp">
         <div class="container rsvp-wrap">
           <div>
-            <span class="eyebrow">RSVP</span>
-            <h2>We would love to celebrate with you</h2>
-            <p class="section-copy">Let us know whether you can attend and share any dietary needs or notes for the weekend.</p>
+            <span class="eyebrow" data-en="RSVP" data-es="RSVP">RSVP</span>
+            <h2 data-en="We would love to celebrate with you" data-es="Nos encantaría celebrar contigo">We would love to celebrate with you</h2>
+            <p class="section-copy" data-en="Let us know whether you can attend and share any dietary needs or notes for the weekend." data-es="Cuéntanos si puedes asistir y comparte cualquier necesidad dietética o nota para el fin de semana.">Let us know whether you can attend and share any dietary needs or notes for the weekend.</p>
             <div class="panel">
-              <h3>Venue</h3>
+              <h3 data-en="Venue" data-es="Lugar del Evento">Venue</h3>
               <a
-                href="https://www.google.com/maps/place/4138+Allen-Genoa+Rd,+Pasadena,+TX+77504/data=!4m2!3m1!1s0x864098497ce4ff7d:0x3b13ead1a5e186ae?sa=X&ved=1t:242&ictx=111">4138
+                href="https://www.google.com/maps/place/4138+Allen-Genoa+Rd,+Pasadena,+TX+77504/data=!4m2!3m1!1s0x864098497ce4ff7d:0x3b13ead1a5e186ae?sa=X&ved=1t:242&ictx=111" data-en="4138 Allen Genoa Rd, Pasadena, Tx 77504" data-es="4138 Allen Genoa Rd, Pasadena, Tx 77504">4138
                 Allen Genoa Rd, Pasadena, Tx 77504</a>
-              <p>Parking is available at the back of the venue.</p>
-              <h3>Attire</h3>
-              <p>Cocktail formal or western attire.</p>
-              <h3>Hotels</h3>
-              <p>CandleWood</p><a
+              <p data-en="Parking is available at the back of the venue." data-es="El estacionamiento está disponible en la parte trasera del lugar.">Parking is available at the back of the venue.</p>
+              <h3 data-en="Attire" data-es="Indumentaria">Attire</h3>
+              <p data-en="Cocktail formal or western attire." data-es="Atuendo formal de cótel o atuendo occidental.">Cocktail formal or western attire.</p>
+              <h3 data-en="Hotels" data-es="Hoteles">Hotels</h3>
+              <p data-en="CandleWood" data-es="CandleWood">CandleWood</p><a
                 href="https://www.ihg.com/candlewood/hotels/us/en/find-hotels/select-roomrate?fromRedirect=true&qSrt=sBR&qErm=false&qSlH=HOUVA&qRms=1&qAdlt=1&qChld=0&qCiD=27&qCiMy=052026&qCoD=28&qCoMy=052026&qAAR=&qRtP=6CBARC&setPMCookies=true&qSHBrC=CW&qDest=3450%20East%20Sam%20Houston%20Parkway%20South,%20Pasadena,%20TX,%20US&qpMbw=0&qpMn=1&srb_u=1&qRmFltr=">3450
                 East Sam Houston Pkwy S, Pasadena, TX 77505</a>
               <p>Fairfield Marriott</p><a href="https://www.marriott.com/reservation/rateListMenu.mi">3640 East Sam
@@ -972,25 +1009,25 @@
           <!-- Formspree RSVP Form -->
           <form class="panel" id="rsvpForm" action="https://formspree.io/f/mreywlrq" method="POST">
             <label>
-              <span class="label">Full name</span>
-              <input type="text" name="name" placeholder="Your name" required />
+              <span class="label" data-en="Full name" data-es="Nombre completo">Full name</span>
+              <input type="text" name="name" placeholder="Your name" data-placeholder-en="Your name" data-placeholder-es="Tu nombre" required />
             </label>
             <label>
-              <span class="label">Email address</span>
-              <input type="email" name="email" placeholder="you@example.com" required />
+              <span class="label" data-en="Email address" data-es="Dirección de correo electrónico">Email address</span>
+              <input type="email" name="email" placeholder="you@example.com" data-placeholder-en="you@example.com" data-placeholder-es="tu@ejemplo.com" required />
             </label>
             <label>
-              <span class="label">Attendance</span>
+              <span class="label" data-en="Attendance" data-es="Asistencia">Attendance</span>
               <select name="attendance" required>
-                <option value="Joyfully accepts">Joyfully accepts</option>
-                <option value="Regretfully declines">Regretfully declines</option>
+                <option value="Joyfully accepts" data-en="Joyfully accepts" data-es="Acepta con alegría">Joyfully accepts</option>
+                <option value="Regretfully declines" data-en="Regretfully declines" data-es="Amablemente declina">Regretfully declines</option>
               </select>
             </label>
             <label>
-              <span class="label">Message or dietary notes</span>
-              <textarea name="message" placeholder="Share a note with the couple"></textarea>
+              <span class="label" data-en="Message or dietary notes" data-es="Mensaje o notas dietéticas">Message or dietary notes</span>
+              <textarea name="message" placeholder="Share a note with the couple" data-placeholder-en="Share a note with the couple" data-placeholder-es="Comparte una nota con la pareja"></textarea>
             </label>
-            <button type="submit">Send RSVP</button>
+            <button type="submit" data-en="Send RSVP" data-es="Enviar RSVP">Send RSVP</button>
             <p id="rsvpMessage" style="display:none; margin-top:1rem; color:green;">Thank you for your RSVP! We can’t
               wait to celebrate with you.</p>
           </form>
@@ -1000,19 +1037,19 @@
         <div class="container">
           <div class="section-head">
             <div>
-              <span class="eyebrow">Registry</span>
-              <h2>Wedding Registry</h2>
+              <span class="eyebrow" data-en="Registry" data-es="Registro">Registry</span>
+              <h2 data-en="Wedding Registry" data-es="Registro de Bodas">Wedding Registry</h2>
             </div>
           </div>
 
           <div class="panel" style="text-align:center; padding:2.5rem;">
-            <p class="section-copy" style="margin:0 auto 1.5rem;">
+            <p class="section-copy" style="margin:0 auto 1.5rem;" data-en="Your presence at our wedding is the greatest gift of all. If you would like to celebrate with a gift, we have created a registry for your convenience." data-es="Tu presencia en nuestra boda es el regalo más grande de todos. Si deseas celebrar con un regalo, hemos creado un registro para tu conveniencia.">
               Your presence at our wedding is the greatest gift of all.
               If you would like to celebrate with a gift, we have created a registry for your convenience.
             </p>
 
             <a class="button" href="https://www.amazon.com/wedding/guest-view/388U2J7OA1LZ7" target="_blank"
-              style="font-size:1.1rem;">
+              style="font-size:1.1rem;" data-en="View Our Amazon Registry" data-es="Ver nuestro Registro de Amazon">
               View Our Amazon Registry
             </a>
           </div>
@@ -1024,14 +1061,14 @@
       <div class="container footer-grid">
         <div>
           <h3>Jayleen & Seann</h3>
-          <p>Thank you for being part of our story. We cannot wait to celebrate with you.</p>
+          <p data-en="Thank you for being part of our story. We cannot wait to celebrate with you." data-es="Gracias por ser parte de nuestra historia. No podemos esperar a celebrar contigo.">Thank you for being part of our story. We cannot wait to celebrate with you.</p>
         </div>
         <div>
-          <h3>Contact</h3>
+          <h3 data-en="Contact" data-es="Contacto">Contact</h3>
           <ul>
             <li>seannrobbins2302@gmail.com</li>
             <li>956-607-3456</li>
-            <li>Houston, Texas</li>
+            <li data-en="Houston, Texas" data-es="Houston, Texas">Houston, Texas</li>
           </ul>
         </div>
       </div>
@@ -1039,6 +1076,127 @@
   </div>
 
   <script>
+    // Language Management System
+    class LanguageManager {
+      constructor() {
+        this.currentLanguage = localStorage.getItem('selectedLanguage') || 'en';
+        this.init();
+      }
+
+      init() {
+        this.updateLanguage(this.currentLanguage);
+        this.attachEventListeners();
+      }
+
+      attachEventListeners() {
+        // Main navigation language buttons
+        const langEnBtn = document.getElementById('langEn');
+        const langEsBtn = document.getElementById('langEs');
+        
+        // Intro language buttons
+        const langEnIntroBtn = document.getElementById('langEnIntro');
+        const langEsIntroBtn = document.getElementById('langEsIntro');
+
+        if (langEnBtn) langEnBtn.addEventListener('click', () => this.setLanguage('en'));
+        if (langEsBtn) langEsBtn.addEventListener('click', () => this.setLanguage('es'));
+        if (langEnIntroBtn) langEnIntroBtn.addEventListener('click', () => this.setLanguage('en'));
+        if (langEsIntroBtn) langEsIntroBtn.addEventListener('click', () => this.setLanguage('es'));
+      }
+
+      setLanguage(lang) {
+        this.currentLanguage = lang;
+        localStorage.setItem('selectedLanguage', lang);
+        this.updateLanguage(lang);
+      }
+
+      updateLanguage(lang) {
+        // Update all elements with data-en and data-es attributes
+        document.querySelectorAll('[data-en][data-es]').forEach(element => {
+          const text = element.getAttribute(`data-${lang}`);
+          if (text) {
+            element.textContent = text;
+          }
+        });
+
+        // Update placeholders
+        document.querySelectorAll('[data-placeholder-en][data-placeholder-es]').forEach(element => {
+          const placeholder = element.getAttribute(`data-placeholder-${lang}`);
+          if (placeholder) {
+            element.placeholder = placeholder;
+          }
+        });
+
+        // Update all language buttons - fix active state
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+          btn.classList.remove('active');
+          if (btn.id === `lang${lang.toUpperCase()}` || btn.getAttribute('data-lang') === lang) {
+            btn.classList.add('active');
+          }
+        });
+
+        // Update form labels and placeholders
+        this.updateFormElements(lang);
+      }
+
+      updateFormElements(lang) {
+        const translations = {
+          en: {
+            'venue': 'Venue',
+            'attire': 'Attire',
+            'hotels': 'Hotels',
+            'fullName': 'Full name',
+            'emailAddress': 'Email address',
+            'attendance': 'Attendance',
+            'message': 'Message or dietary notes',
+            'sendRsvp': 'Send RSVP',
+            'yourName': 'Your name',
+            'yourEmail': 'you@example.com',
+            'joyfullyAccepts': 'Joyfully accepts',
+            'regretfullyDeclines': 'Regretfully declines',
+            'shareNote': 'Share a note with the couple'
+          },
+          es: {
+            'venue': 'Lugar',
+            'attire': 'Vestimenta',
+            'hotels': 'Hoteles',
+            'fullName': 'Nombre completo',
+            'emailAddress': 'Dirección de correo electrónico',
+            'attendance': 'Asistencia',
+            'message': 'Mensaje o notas dietéticas',
+            'sendRsvp': 'Enviar RSVP',
+            'yourName': 'Tu nombre',
+            'yourEmail': 'tu@ejemplo.com',
+            'joyfullyAccepts': 'Acepta con alegría',
+            'regretfullyDeclines': 'Rechaza lamentablemente',
+            'shareNote': 'Comparte una nota con la pareja'
+          }
+        };
+
+        const tx = translations[lang];
+        
+        // Update form elements with data-i18n attribute
+        document.querySelectorAll('[data-i18n]').forEach(element => {
+          const key = element.getAttribute('data-i18n');
+          if (tx[key]) {
+            if (element.tagName === 'BUTTON' || element.tagName === 'INPUT' && element.type === 'submit') {
+              element.textContent = tx[key];
+            } else if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+              if (element.placeholder) {
+                element.placeholder = tx[key];
+              }
+              element.textContent = tx[key];
+            } else {
+              element.textContent = tx[key];
+            }
+          }
+        });
+      }
+    }
+
+    // Initialize language manager
+    const languageManager = new LanguageManager();
+
+    // RSVP Form Handler
     const rsvpForm = document.getElementById('rsvpForm');
     const rsvpMessage = document.getElementById('rsvpMessage');
 
@@ -1065,10 +1223,7 @@
       }
     });
 
-    const intro = document.getElementById('intro');
-    const page = document.getElementById('page');
-    const openEnvelope = document.getElementById('openEnvelope');
-
+    // Countdown Timer & Envelope Reveal
     (function () {
       // Target date: June 27, 2026, 6:30 PM CDT (UTC-5)
       const targetDate = new Date('2026-06-27T18:30:00-05:00');
